@@ -980,7 +980,7 @@
                 
               
 
-              <time title="创建时间：2019-01-19 04:33:28 / 修改时间：04:37:08" itemprop="dateCreated datePublished" datetime="2019-01-19T04:33:28+08:00">2019-01-19</time>
+              <time title="创建时间：2019-01-19 04:33:28 / 修改时间：04:44:26" itemprop="dateCreated datePublished" datetime="2019-01-19T04:33:28+08:00">2019-01-19</time>
             
 
             
@@ -1045,9 +1045,9 @@
       
         
           
-          Hexo博文置顶（自定义排序）使用的是top属性，top值越高，排序越在前，不设置top值得博文按照时间顺序排序。修改Hexo文件夹下的node_modules/hexo-generator-index/lib/generator.js
-打开在最后添加如下javascript代码
-123456789
+          Hexo博文置顶（自定义排序）如果目前已经有修改后支持置顶的仓库，可以直接用以下命令安装。
+12$ npm uninstall hexo-generator-index --save$ npm install hexo-generator-index-pin-top --save
+使用的是top属性
           ...
           <!--noindex-->
           

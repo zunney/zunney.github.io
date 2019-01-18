@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Zunney的博客</title>
+  
+  <subtitle>功成名就不是目的，让自己快乐才叫做意义</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="//zunney.cn/"/>
+  <updated>2019-01-18T20:14:55.596Z</updated>
+  <id>//zunney.cn/</id>
+  
+  <author>
+    <name>Zunney</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Ubuntu上搭建个人博客系统Hexo</title>
+    <link href="//zunney.cn/2019/01/19/%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9FHexo/"/>
+    <id>//zunney.cn/2019/01/19/在Ubuntu上搭建个人博客系统Hexo/</id>
+    <published>2019-01-18T20:14:13.000Z</published>
+    <updated>2019-01-18T20:14:55.596Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="//zunney.cn/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux下DHCP服务器配置</title>
+    <link href="//zunney.cn/2018/11/15/DHCP/"/>
+    <id>//zunney.cn/2018/11/15/DHCP/</id>
+    <published>2018-11-14T17:34:33.000Z</published>
+    <updated>2019-01-18T19:33:25.933Z</updated>
+    
+    <content type="html"><![CDATA[<p>DHCP是动态主机配置协议. 这个协议用于向计算机自动提供IP地址,子网掩码和路由信息。网络管理员通常会分配某个范围的IP地址来分发给局域网上的客户机。当设备接入这个局域网时，它们会向 DHCP服务器请求一个 IP 地址。然后DHCP服务器为每个请求的设备分配一个地址，直到分配完该范围内的所有 IP 地址为止。已经分配的IP地址必须定时地延长借用期。这个延期的过程称作leasing，确保了当客户机设备在正常地释放IP地址之前突然从网络断开时被分配的地址可以归还给服务器。本文以Redhat Linux 5.5为例，介绍如何建立一个DHCP服务器。</p><blockquote><p>将IP设为静态IP地址</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi  /etc/sysconfig/network-scripts/ifcfg-eth0<span class="comment">#编辑网卡主配置文件,见下图</span></span><br><span class="line">service  network  restart<span class="comment">#重启网络服务</span></span><br><span class="line">ifconfig<span class="comment">#查看ip是否修改成</span></span><br></pre></td></tr></table></figure><div><img src="/images/dhcp1.png" alt=""></div><p><br></p><blockquote><p>安装dhcp程序包</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir  /mnt/cdrom/</span><br><span class="line">mount  /dev/cdrom /mnt/cdrom/<span class="comment">#挂载镜像</span></span><br><span class="line"><span class="built_in">cd</span>  /mnt/cdrom/Server/</span><br><span class="line">rpm  -ivh  dhcp-3.0.5-23.el5.i386.rpm<span class="comment">#安装</span></span><br><span class="line">rpm -qa dhcp<span class="comment">#查询是否安装成功</span></span><br></pre></td></tr></table></figure><p><br></p><blockquote><p>修改dhcp配置文件</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp  /usr/share/doc/dhcp-3.0.5/dhcpd.conf.sample  /etc/dhcpd.conf<span class="comment">#把主配置文件拷贝到etc目录下，y 确定覆盖</span></span><br><span class="line">vi  /etc/dhcpd.conf<span class="comment">#编辑配置文件，见下图</span></span><br></pre></td></tr></table></figure><div><img src="/images/dhcp2.png" alt=""></div><p><br></p><blockquote><p>关闭Selinux</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi  /etc/selinux/config</span><br></pre></td></tr></table></figure><p><img src="/images/selinux.png" alt=""></p><p><br></p><blockquote><p>清空防火墙</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables  -F</span><br></pre></td></tr></table></figure><p><br></p><blockquote><p>开启dhcp服务</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service  dhcpd  start<span class="comment">#开启dhcp服务</span></span><br></pre></td></tr></table></figure><p><br></p><blockquote><p>测试</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">将两台虚拟机设置为同一个虚拟网络</span><br><span class="line">ipconfig  /release<span class="comment">#释放IP地址</span></span><br><span class="line">ipconfig  /renew<span class="comment">#重新获取IP地址</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;DHCP是动态主机配置协议. 这个协议用于向计算机自动提供IP地址,子网掩码和路由信息。网络管理员通常会分配某个范围的IP地址来分发给局域网上的客户机。当设备接入这个局域网时，它们会向 DHCP服务器请求一个 IP 地址。然后DHCP服务器为每个请求的设备分配一个地址，直到
+      
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="DHCP" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/DHCP/"/>
+    
+    
+      <category term="linux" scheme="//zunney.cn/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux下Apache服务器配置</title>
+    <link href="//zunney.cn/2018/11/15/Apache/"/>
+    <id>//zunney.cn/2018/11/15/Apache/</id>
+    <published>2018-11-14T17:34:19.000Z</published>
+    <updated>2019-01-18T19:33:25.933Z</updated>
+    
+    <content type="html"><![CDATA[<p>Apache 是一个知名的开源Web服务器。早期的Apache服务器由Apache Group来维护，直到1999年6月Apache Group在美国德拉瓦市成立了非盈利性组织的公司，即Apache软件基金会（Apache Software Foundation，ASF）。我们如果要浏览一个网页的话，基本上所有的网站都使用的是http协议来进行数据传输的。本文以Redhat Linux 5.5为例，介绍如何建立一个Apache服务器。</p><h3 id="主服务器的配置："><a href="#主服务器的配置：" class="headerlink" title="主服务器的配置："></a>主服务器的配置：</h3><p><br></p><blockquote><h4 id="将IP设为静态IP地址"><a href="#将IP设为静态IP地址" class="headerlink" title="将IP设为静态IP地址"></a>将IP设为静态IP地址</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi  /etc/sysconfig/network-scripts/ifcfg-eth0<span class="comment">#编辑网卡主配置文件,见下图</span></span><br><span class="line">service  network  restart<span class="comment">#重启网络服务</span></span><br><span class="line">ifconfig<span class="comment">#查看ip是否修改成功</span></span><br></pre></td></tr></table></figure><div><img src="/images/dhcp1.png" alt=""></div><p><br></p><blockquote><h4 id="配置本地yum源"><a href="#配置本地yum源" class="headerlink" title="配置本地yum源"></a>配置本地yum源</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir  /mnt/cdrom</span><br><span class="line">mount  /dev/cdrom  /mnt/cdrom<span class="comment">#挂载镜像</span></span><br><span class="line">thouch  /etc/yum.repo.d/qzy.repo<span class="comment">#创建仓库文件</span></span><br><span class="line">vi  /etc/yum.repo.d/qzy.repo<span class="comment">#编辑仓库文件，见下图</span></span><br></pre></td></tr></table></figure><p><code>注意：这里有个坑，很多同学配置好后执行yum repolist会报错，找不到repome.xml文件，这是因为路径配置错误，在redhat5.5下，路径必须设置为/mnt/cdrom/Server，而在redhat6.4下却可以设置为/mnt/cdrom</code></p><div><img src="/images/yums.png" alt=""></div><p><br></p><blockquote><h4 id="安装配置httpd"><a href="#安装配置httpd" class="headerlink" title="安装配置httpd"></a>安装配置httpd</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd* -y<span class="comment">#安装httpd的相关包</span></span><br><span class="line">vi /etc/httpd/con/httpd.conf<span class="comment">#编辑主配置文件,详解见文末</span></span><br><span class="line">在httpd.conf中找到<span class="comment">#ServerName *:80把#去掉*改为本机IP</span></span><br><span class="line"><span class="built_in">cd</span> /var/www/html/</span><br><span class="line">touch index.html<span class="comment">#创建网页文件</span></span><br><span class="line">vi index.html<span class="comment">#编辑网页文件，见下图</span></span><br></pre></td></tr></table></figure><div><img src="/images/h5.png" alt=""></div><p><br></p><blockquote><h4 id="关闭Selinux"><a href="#关闭Selinux" class="headerlink" title="关闭Selinux"></a>关闭Selinux</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi  /etc/selinux/config</span><br></pre></td></tr></table></figure><div><img src="/images/selinux.png" alt=""></div><p><br></p><blockquote><h4 id="清空防火墙"><a href="#清空防火墙" class="headerlink" title="清空防火墙"></a>清空防火墙</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables  -F</span><br></pre></td></tr></table></figure><p><br></p><blockquote><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service  httpd  restart<span class="comment">#重启服务</span></span><br><span class="line">打开浏览器，输入本机IP<span class="comment">#见下图</span></span><br></pre></td></tr></table></figure><div><img src="/images/wb.png" alt=""></div><p><br><br></p><h3 id="虚拟主机的配置："><a href="#虚拟主机的配置：" class="headerlink" title="虚拟主机的配置："></a>虚拟主机的配置：</h3><p><br></p><blockquote><h4 id="基于IP的虚拟服务器"><a href="#基于IP的虚拟服务器" class="headerlink" title="基于IP的虚拟服务器"></a>基于IP的虚拟服务器</h4></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Apache 是一个知名的开源Web服务器。早期的Apache服务器由Apache Group来维护，直到1999年6月Apache Group在美国德拉瓦市成立了非盈利性组织的公司，即Apache软件基金会（Apache Software Foundation，ASF）。
+      
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Apache" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Apache/"/>
+    
+    
+      <category term="linux" scheme="//zunney.cn/tags/linux/"/>
+    
+  </entry>
+  
+</feed>

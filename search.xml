@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[在Ubuntu上搭建个人博客系统Hexo]]></title>
+    <url>%2F2019%2F01%2F19%2F%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9FHexo%2F</url>
+    <content type="text"></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux下DHCP服务器配置]]></title>
+    <url>%2F2018%2F11%2F15%2FDHCP%2F</url>
+    <content type="text"><![CDATA[DHCP是动态主机配置协议. 这个协议用于向计算机自动提供IP地址,子网掩码和路由信息。网络管理员通常会分配某个范围的IP地址来分发给局域网上的客户机。当设备接入这个局域网时，它们会向 DHCP服务器请求一个 IP 地址。然后DHCP服务器为每个请求的设备分配一个地址，直到分配完该范围内的所有 IP 地址为止。已经分配的IP地址必须定时地延长借用期。这个延期的过程称作leasing，确保了当客户机设备在正常地释放IP地址之前突然从网络断开时被分配的地址可以归还给服务器。本文以Redhat Linux 5.5为例，介绍如何建立一个DHCP服务器。 将IP设为静态IP地址 123vi /etc/sysconfig/network-scripts/ifcfg-eth0 #编辑网卡主配置文件,见下图service network restart #重启网络服务ifconfig #查看ip是否修改成 安装dhcp程序包 12345mkdir /mnt/cdrom/mount /dev/cdrom /mnt/cdrom/ #挂载镜像cd /mnt/cdrom/Server/rpm -ivh dhcp-3.0.5-23.el5.i386.rpm #安装rpm -qa dhcp #查询是否安装成功 修改dhcp配置文件 12cp /usr/share/doc/dhcp-3.0.5/dhcpd.conf.sample /etc/dhcpd.conf #把主配置文件拷贝到etc目录下，y 确定覆盖vi /etc/dhcpd.conf #编辑配置文件，见下图 关闭Selinux 1vi /etc/selinux/config 清空防火墙 1iptables -F 开启dhcp服务 1service dhcpd start #开启dhcp服务 测试 123将两台虚拟机设置为同一个虚拟网络ipconfig /release #释放IP地址ipconfig /renew #重新获取IP地址]]></content>
+      <categories>
+        <category>学习</category>
+        <category>DHCP</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux下Apache服务器配置]]></title>
+    <url>%2F2018%2F11%2F15%2FApache%2F</url>
+    <content type="text"><![CDATA[Apache 是一个知名的开源Web服务器。早期的Apache服务器由Apache Group来维护，直到1999年6月Apache Group在美国德拉瓦市成立了非盈利性组织的公司，即Apache软件基金会（Apache Software Foundation，ASF）。我们如果要浏览一个网页的话，基本上所有的网站都使用的是http协议来进行数据传输的。本文以Redhat Linux 5.5为例，介绍如何建立一个Apache服务器。 主服务器的配置： 将IP设为静态IP地址 123vi /etc/sysconfig/network-scripts/ifcfg-eth0 #编辑网卡主配置文件,见下图service network restart #重启网络服务ifconfig #查看ip是否修改成功 配置本地yum源 1234mkdir /mnt/cdrom mount /dev/cdrom /mnt/cdrom #挂载镜像thouch /etc/yum.repo.d/qzy.repo #创建仓库文件vi /etc/yum.repo.d/qzy.repo #编辑仓库文件，见下图 注意：这里有个坑，很多同学配置好后执行yum repolist会报错，找不到repome.xml文件，这是因为路径配置错误，在redhat5.5下，路径必须设置为/mnt/cdrom/Server，而在redhat6.4下却可以设置为/mnt/cdrom 安装配置httpd 123456yum install httpd* -y #安装httpd的相关包vi /etc/httpd/con/httpd.conf #编辑主配置文件,详解见文末在httpd.conf中找到#ServerName *:80 把#去掉*改为本机IPcd /var/www/html/touch index.html #创建网页文件vi index.html #编辑网页文件，见下图 关闭Selinux 1vi /etc/selinux/config 清空防火墙 1iptables -F 测试 12service httpd restart #重启服务打开浏览器，输入本机IP #见下图 虚拟主机的配置： 基于IP的虚拟服务器 12]]></content>
+      <categories>
+        <category>学习</category>
+        <category>Apache</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+</search>

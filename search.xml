@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[hexo安装命令]]></title>
     <url>%2F2019%2F01%2F19%2Fhexo%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[Hexo博文置顶（自定义排序）如果目前已经有修改后支持置顶的仓库，可以直接用以下命令安装。 12$ npm uninstall hexo-generator-index --save$ npm install hexo-generator-index-pin-top --save 使用的是top属性，top值越高，排序越在前，不设置top值得博文按照时间顺序排序。修改Hexo文件夹下的node_modules/hexo-generator-index/lib/generator.js 打开在最后添加如下javascript代码 12345678910111213posts.data = posts.data.sort(function(a, b) &#123;if(a.top &amp;&amp; b.top) &#123; // 两篇文章top都有定义 if(a.top == b.top) return b.date - a.date; // 若top值一样则按照文章日期降序排 else return b.top - a.top; // 否则按照top值降序排&#125;else if(a.top &amp;&amp; !b.top) &#123; // 以下是只有一篇文章top有定义，那么将有top的排在前面（这里用异或操作居然不行233） return -1;&#125;else if(!a.top &amp;&amp; b.top) &#123; return 1;&#125;else return b.date - a.date; // 都没定义按照文章日期降序排&#125;); 在写文章的时候添加top属性就行了。]]></content>
+    <content type="text"><![CDATA[Hexo博文置顶（自定义排序）如果目前已经有修改后支持置顶的仓库，可以直接用以下命令安装。 12npm uninstall hexo-generator-index --savenpm install hexo-generator-index-pin-top --save 使用的是top属性，top值越高，排序越在前，不设置top值得博文按照时间顺序排序。修改Hexo文件夹下的node_modules/hexo-generator-index/lib/generator.js 打开在最后添加如下javascript代码 12345678910111213posts.data = posts.data.sort(function(a, b) &#123;if(a.top &amp;&amp; b.top) &#123; // 两篇文章top都有定义 if(a.top == b.top) return b.date - a.date; // 若top值一样则按照文章日期降序排 else return b.top - a.top; // 否则按照top值降序排&#125;else if(a.top &amp;&amp; !b.top) &#123; // 以下是只有一篇文章top有定义，那么将有top的排在前面（这里用异或操作居然不行233） return -1;&#125;else if(!a.top &amp;&amp; b.top) &#123; return 1;&#125;else return b.date - a.date; // 都没定义按照文章日期降序排&#125;); 在写文章的时候添加top属性就行了。 hexo增加RSS在你 Hexo 站点目录下： 1npm install hexo-generator-feed --save 打开 Hexo 站点下的 _config.yml ,添加如下配置： 12345678# feed# Dependencies: https://github.com/hexojs/hexo-generator-feedfeed: type: atom path: atom.xml limit: 20 hub: content: 本地搜索在你站点的根目录下 1npm install hexo-generator-searchdb --save 打开 Hexo 站点的 _config.yml,添加配置 12345search: path: search.xml field: post format: html limit: 10000 打开 themes/next/_config.yml ,搜索关键字 local_search ,设置为 true： 123456789# Local search# Dependencies: https://github.com/flashlab/hexo-generator-searchlocal_search: enable: true # if auto, trigger search by changing input # if manual, trigger search by pressing enter key or search button trigger: auto # show top n results per article, show all results by setting to -1 top_n_per_article: 1 统计功能，统计功能,显示文章字数统计,阅读时长,总字数在站点的根目录下： 1$ npm i --save hexo-wordcount 打开 themes/next/_config.yml ，搜索关键字 post_wordcount： 1234567891011# Post wordcount display settings# Dependencies: https://github.com/willin/hexo-wordcountpost_wordcount: item_text: true #字数统计 wordcount: true #预览时间 min2read: true #总字数,显示在页面底部 totalcount: true separated_meta: true 本地站点推送到GitHub上在站点更目录下： 1$ npm install hexo-deployer-git --save 在 Hexo 站点的 _config.yml 中配置 deploy： 12345678# Deployment## Docs: https://hexo.io/docs/deployment.htmldeploy: type: git repo: &lt;repository url&gt; #your github.io.git branch: master$ hexo clean$ hexo d --g hexo g # 生成本地 public 静态文件, hexo d # 部署到 Github 上, 也可以缩写成：hexo g –d 。]]></content>
       <categories>
         <category>学习</category>
         <category>hexo</category>
@@ -15,33 +15,9 @@
   <entry>
     <title><![CDATA[在Ubuntu上搭建个人博客系统Hexo]]></title>
     <url>%2F2019%2F01%2F19%2F%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9FHexo%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[基于 Ubuntu 搭建 Hexo 个人博客]背景 相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的Hexo 博客。 一、准备环境1、安装 Git sudo apt install git-core -y 2、安装Node.js wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | shsource ~/.profilenvm install stable 二、安装 Hexo1、安装 cnpm npm install -g cnpm –registry=https://registry.npm.taobao.org 2、安装 Hexo 先创建一个文件夹，然后进入到文件夹开始安装 12345&gt; mkdir hexo&gt; cd hexo/&gt; cnpm install -g hexo-cli&gt; hexo init&gt; 3、测试安装成功打开 Hexo 服务 hexo server **此时打开浏览器访问自己【主机的ip：4000】就可以看到我们搭建成功的博客页面。但是这仅仅是本地的，接下来把博客部署到 GitHub 上面我们就可以脱离本地访问了。 三、 将博客部署到 GitHub1、注册 GitHub如果没有GitHub账户的先去去注册GitHub账户，有GitHub账户的直接下一步; 2、设置 user.name 和 user.email注册好之后回来自己的机器上 git config –global user.name “Your user.name”git config –global user.email “You user.email”//“ “里面换成自己的user.name和user.email; 3、生成 shh 密匙 ssh-keygen -t rsa -C user.email**下面提示输入要保存到的路径，直接回车就行了，默认保存到/home/ubuntu/.ssh/id_rsa 4、查看 shh 密匙 vim /home/ubuntu/.ssh/id_rsa 把密匙复制一下，接下来去 GitHub 账户下添加 SSH key； 5、在 GitHub 账户添加 SSH key添加 ssh key ，点击传送； 6、创建 GitHub 仓库 命名格式为”账户的userName”.github.io例如 ： zhangsan.github.io 去创建GitHub仓库) 7、修改 hexo 配置文件进入到自己的hexo 安装目录下 ，打开_config.yml文件 修改下面这部分； 1234&lt;pre&gt;`deploy: type: git repo: git@github.com:(BoView)/(BoView).github.io.git #括号里面换成自己的用户名和仓库名,去掉括号 branch: master 8、部署12345678//生成静态页面 hexo g //将public文件内容部署到github仓库 hexo d //这两条是常用的命令，后者也可以这样 hexo d -g //或者 hexo g -d 如果部署遇到错误，先执行下面这条命令 npm install hexo-deployer-git –save 然后重新部署一下，此时可以打开浏览器访问userName.github.io(GitHub仓库名)即可以访问到搭建的博客页面到这里基本完成任务了，但是我们想更完美一点，再绑定个域名，然后用域名访问岂不美哉； 四、绑定域名1、添加解析记录去自己的域名下添加解析) 记录类型为 CNAME 主机记录为@ 线路选择默认，TTL选择600，记录值为github的仓库名userName.github.io 2、配置 hexo创建CNAME配置文件 touch ~/hexo/source/CNAME 下面在CNAME配置文件里面添加刚才解析的域名 例如： zhangsan.com 然后重新部署一下， ok，ok，恭喜大家， 此时打开浏览器访问自己的域名即可以访问自己搭建的博客 开启自己的【博客之旅】吧，]]></content>
       <categories>
         <category>学习</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Linux下DHCP服务器配置]]></title>
-    <url>%2F2018%2F11%2F15%2FDHCP%2F</url>
-    <content type="text"><![CDATA[DHCP是动态主机配置协议. 这个协议用于向计算机自动提供IP地址,子网掩码和路由信息。网络管理员通常会分配某个范围的IP地址来分发给局域网上的客户机。当设备接入这个局域网时，它们会向 DHCP服务器请求一个 IP 地址。然后DHCP服务器为每个请求的设备分配一个地址，直到分配完该范围内的所有 IP 地址为止。已经分配的IP地址必须定时地延长借用期。这个延期的过程称作leasing，确保了当客户机设备在正常地释放IP地址之前突然从网络断开时被分配的地址可以归还给服务器。本文以Redhat Linux 5.5为例，介绍如何建立一个DHCP服务器。 将IP设为静态IP地址 123vi /etc/sysconfig/network-scripts/ifcfg-eth0 #编辑网卡主配置文件,见下图service network restart #重启网络服务ifconfig #查看ip是否修改成 安装dhcp程序包 12345mkdir /mnt/cdrom/mount /dev/cdrom /mnt/cdrom/ #挂载镜像cd /mnt/cdrom/Server/rpm -ivh dhcp-3.0.5-23.el5.i386.rpm #安装rpm -qa dhcp #查询是否安装成功 修改dhcp配置文件 12cp /usr/share/doc/dhcp-3.0.5/dhcpd.conf.sample /etc/dhcpd.conf #把主配置文件拷贝到etc目录下，y 确定覆盖vi /etc/dhcpd.conf #编辑配置文件，见下图 关闭Selinux 1vi /etc/selinux/config 清空防火墙 1iptables -F 开启dhcp服务 1service dhcpd start #开启dhcp服务 测试 123将两台虚拟机设置为同一个虚拟网络ipconfig /release #释放IP地址ipconfig /renew #重新获取IP地址]]></content>
-      <categories>
-        <category>学习</category>
-        <category>DHCP</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Linux下Apache服务器配置]]></title>
-    <url>%2F2018%2F11%2F15%2FApache%2F</url>
-    <content type="text"><![CDATA[Apache 是一个知名的开源Web服务器。早期的Apache服务器由Apache Group来维护，直到1999年6月Apache Group在美国德拉瓦市成立了非盈利性组织的公司，即Apache软件基金会（Apache Software Foundation，ASF）。我们如果要浏览一个网页的话，基本上所有的网站都使用的是http协议来进行数据传输的。本文以Redhat Linux 5.5为例，介绍如何建立一个Apache服务器。 主服务器的配置： 将IP设为静态IP地址 123vi /etc/sysconfig/network-scripts/ifcfg-eth0 #编辑网卡主配置文件,见下图service network restart #重启网络服务ifconfig #查看ip是否修改成功 配置本地yum源 1234mkdir /mnt/cdrom mount /dev/cdrom /mnt/cdrom #挂载镜像thouch /etc/yum.repo.d/qzy.repo #创建仓库文件vi /etc/yum.repo.d/qzy.repo #编辑仓库文件，见下图 注意：这里有个坑，很多同学配置好后执行yum repolist会报错，找不到repome.xml文件，这是因为路径配置错误，在redhat5.5下，路径必须设置为/mnt/cdrom/Server，而在redhat6.4下却可以设置为/mnt/cdrom 安装配置httpd 123456yum install httpd* -y #安装httpd的相关包vi /etc/httpd/con/httpd.conf #编辑主配置文件,详解见文末在httpd.conf中找到#ServerName *:80 把#去掉*改为本机IPcd /var/www/html/touch index.html #创建网页文件vi index.html #编辑网页文件，见下图 关闭Selinux 1vi /etc/selinux/config 清空防火墙 1iptables -F 测试 12service httpd restart #重启服务打开浏览器，输入本机IP #见下图 虚拟主机的配置： 基于IP的虚拟服务器 12]]></content>
-      <categories>
-        <category>学习</category>
-        <category>Apache</category>
       </categories>
       <tags>
         <tag>linux</tag>

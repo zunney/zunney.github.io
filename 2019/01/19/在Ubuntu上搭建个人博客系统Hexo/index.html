@@ -135,15 +135,18 @@
 
 
 
-  <meta name="keywords" content="linux">
+  <meta name="description" content="基于 Ubuntu 搭建 Hexo 个人博客]背景 相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的Hexo 博客。  一、准备环境1、安装 Git s">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Ubuntu上搭建个人博客系统Hexo">
 <meta property="og:url" content="//zunney.cn/2019/01/19/在Ubuntu上搭建个人博客系统Hexo/index.html">
 <meta property="og:site_name" content="Zunney的博客">
+<meta property="og:description" content="基于 Ubuntu 搭建 Hexo 个人博客]背景 相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的Hexo 博客。  一、准备环境1、安装 Git s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-18T20:22:51.156Z">
+<meta property="og:updated_time" content="2019-01-20T06:01:16.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Ubuntu上搭建个人博客系统Hexo">
+<meta name="twitter:description" content="基于 Ubuntu 搭建 Hexo 个人博客]背景 相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的Hexo 博客。  一、准备环境1、安装 Git s">
 
 
 
@@ -436,12 +439,24 @@
                 
               
 
-              <time title="创建时间：2019-01-19 04:14:13 / 修改时间：04:22:51" itemprop="dateCreated datePublished" datetime="2019-01-19T04:14:13+08:00">2019-01-19</time>
+              <time title="创建时间：2019-01-19 04:14:13" itemprop="dateCreated datePublished" datetime="2019-01-19T04:14:13+08:00">2019-01-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-20 14:01:16" itemprop="dateModified" datetime="2019-01-20T14:01:16+08:00">2019-01-20</time>
               
             
           </span>
@@ -492,7 +507,72 @@
       
 
       
-        
+        <h1 id="基于-Ubuntu-搭建-Hexo-个人博客"><a href="#基于-Ubuntu-搭建-Hexo-个人博客" class="headerlink" title="基于 Ubuntu 搭建 Hexo 个人博客]"></a>基于 Ubuntu 搭建 Hexo 个人博客]</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><blockquote>
+<p>相比 wordpress，我更喜欢 Hexo 的简洁 ，然后就去找教程了，然后发现一些教程照着去做会报一些错误，可能因为环境差异的原因，然后综合了多个教程和各种网上扒报错终于把 Hexo 搭好了，然后整理了一下贴出来，希望能给想要搭建 Hexo 个人博客的大家一个参考，想先看看效果，欢迎访问我的<a href="http://gcchen.cn/" target="_blank" rel="noopener">Hexo 博客</a>。</p>
+</blockquote>
+<h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><h3 id="1、安装-Git"><a href="#1、安装-Git" class="headerlink" title="1、安装 Git"></a>1、安装 Git</h3><blockquote>
+<p>sudo apt install git-core -y</p>
+</blockquote>
+<h3 id="2、安装Node-js"><a href="#2、安装Node-js" class="headerlink" title="2、安装Node.js"></a>2、安装Node.js</h3><blockquote>
+<p>wget -qO- <a href="https://raw.github.com/creationix/nvm/master/install.sh" target="_blank" rel="noopener">https://raw.github.com/creationix/nvm/master/install.sh</a> | sh<br>source ~/.profile<br>nvm install stable</p>
+</blockquote>
+<h2 id="二、安装-Hexo"><a href="#二、安装-Hexo" class="headerlink" title="二、安装 Hexo"></a>二、安装 Hexo</h2><h3 id="1、安装-cnpm"><a href="#1、安装-cnpm" class="headerlink" title="1、安装 cnpm"></a>1、安装 cnpm</h3><blockquote>
+<p>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org/" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+</blockquote>
+<h3 id="2、安装-Hexo"><a href="#2、安装-Hexo" class="headerlink" title="2、安装 Hexo"></a>2、安装 Hexo</h3><blockquote>
+<p>先创建一个文件夹，然后进入到文件夹开始安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; mkdir hexo</span><br><span class="line">&gt; cd hexo/</span><br><span class="line">&gt; cnpm install -g hexo-cli</span><br><span class="line">&gt; hexo init</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="3、测试安装成功"><a href="#3、测试安装成功" class="headerlink" title="3、测试安装成功"></a>3、测试安装成功</h3><p><strong>打开 Hexo 服务</strong></p>
+<blockquote>
+<p>hexo server</p>
+</blockquote>
+<p>**此时打开浏览器访问自己【主机的ip：4000】就可以看到我们搭建成功的博客页面。但是这仅仅是本地的，接下来把博客部署到 GitHub 上面我们就可以脱离本地访问了。</p>
+<h2 id="三、-将博客部署到-GitHub"><a href="#三、-将博客部署到-GitHub" class="headerlink" title="三、 将博客部署到 GitHub"></a>三、 将博客部署到 GitHub</h2><h3 id="1、注册-GitHub"><a href="#1、注册-GitHub" class="headerlink" title="1、注册 GitHub"></a>1、注册 GitHub</h3><p><strong>如果没有GitHub账户的先去去注册GitHub账户，有GitHub账户的直接下一步;</strong></p>
+<h3 id="2、设置-user-name-和-user-email"><a href="#2、设置-user-name-和-user-email" class="headerlink" title="2、设置 user.name 和 user.email"></a>2、设置 user.name 和 user.email</h3><p><strong>注册好之后回来自己的机器上</strong></p>
+<blockquote>
+<p>git config –global user.name “Your user.name”<br>git config –global user.email “You user.email”<br>//“ “里面换成自己的user.name和user.email;</p>
+</blockquote>
+<h3 id="3、生成-shh-密匙"><a href="#3、生成-shh-密匙" class="headerlink" title="3、生成 shh 密匙"></a>3、生成 shh 密匙</h3><blockquote>
+<p>ssh-keygen -t rsa -C user.email<br>**下面提示输入要保存到的路径，直接回车就行了，默认保存到/home/ubuntu/.ssh/id_rsa</p>
+</blockquote>
+<h3 id="4、查看-shh-密匙"><a href="#4、查看-shh-密匙" class="headerlink" title="4、查看 shh 密匙"></a>4、查看 shh 密匙</h3><blockquote>
+<p>vim /home/ubuntu/.ssh/id_rsa</p>
+</blockquote>
+<p><strong>把密匙复制一下，接下来去 GitHub 账户下添加 SSH key；</strong></p>
+<h3 id="5、在-GitHub-账户添加-SSH-key"><a href="#5、在-GitHub-账户添加-SSH-key" class="headerlink" title="5、在 GitHub 账户添加 SSH key"></a>5、在 GitHub 账户添加 SSH key</h3><p><strong>添加 ssh key ，点击传送；</strong></p>
+<h3 id="6、创建-GitHub-仓库"><a href="#6、创建-GitHub-仓库" class="headerlink" title="6、创建 GitHub 仓库"></a>6、创建 GitHub 仓库</h3><blockquote>
+<p>命名格式为”账户的userName”.github.io<br>例如 ： zhangsan.github.io</p>
+</blockquote>
+<p><strong>去创建GitHub仓库)</strong></p>
+<h3 id="7、修改-hexo-配置文件"><a href="#7、修改-hexo-配置文件" class="headerlink" title="7、修改 hexo 配置文件"></a>7、修改 hexo 配置文件</h3><p><strong>进入到自己的hexo 安装目录下 ，打开_config.yml文件</strong></p>
+<p><strong>修改下面这部分；</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;pre&gt;`deploy:</span><br><span class="line">   type: git</span><br><span class="line">    repo: git@github.com:(BoView)/(BoView).github.io.git #括号里面换成自己的用户名和仓库名,去掉括号</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
+<h3 id="8、部署"><a href="#8、部署" class="headerlink" title="8、部署"></a>8、部署</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//生成静态页面</span><br><span class="line">    hexo g</span><br><span class="line">    //将public文件内容部署到github仓库</span><br><span class="line">    hexo d</span><br><span class="line">    //这两条是常用的命令，后者也可以这样</span><br><span class="line">    hexo d -g</span><br><span class="line">    //或者</span><br><span class="line">    hexo g -d</span><br></pre></td></tr></table></figure>
+<p><strong>如果部署遇到错误，先执行下面这条命令</strong></p>
+<blockquote>
+<p>npm install hexo-deployer-git –save</p>
+</blockquote>
+<blockquote>
+<p>然后重新部署一下，<br>此时可以打开浏览器访问userName.github.io(GitHub仓库名)<br>即可以访问到搭建的博客页面<br>到这里基本完成任务了，但是我们想更完美一点，再绑定个域名，然后用域名访问岂不美哉；</p>
+</blockquote>
+<h2 id="四、绑定域名"><a href="#四、绑定域名" class="headerlink" title="四、绑定域名"></a>四、绑定域名</h2><h3 id="1、添加解析记录"><a href="#1、添加解析记录" class="headerlink" title="1、添加解析记录"></a>1、添加解析记录</h3><p><strong>去自己的域名下添加解析)</strong></p>
+<blockquote>
+<p>记录类型为 CNAME 主机记录为@ 线路选择默认，TTL选择600，记录值为github的仓库名userName.github.io</p>
+</blockquote>
+<h3 id="2、配置-hexo"><a href="#2、配置-hexo" class="headerlink" title="2、配置 hexo"></a>2、配置 hexo</h3><p><strong>创建CNAME配置文件</strong></p>
+<blockquote>
+<p>touch ~/hexo/source/CNAME</p>
+</blockquote>
+<p><strong>下面在CNAME配置文件里面添加刚才解析的域名</strong></p>
+<blockquote>
+<p>例如： zhangsan.com</p>
+</blockquote>
+<p><strong>然后重新部署一下，</strong></p>
+<p><strong>ok，ok，恭喜大家，</strong></p>
+<p><strong>此时打开浏览器访问自己的域名即可以访问自己搭建的博客</strong></p>
+<p><strong>开启自己的【博客之旅】吧，</strong></p>
+
       
     </div>
 
@@ -557,10 +637,6 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/15/DHCP/" rel="next" title="Linux下DHCP服务器配置">
-                <i class="fa fa-chevron-left"></i> Linux下DHCP服务器配置
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -619,8 +695,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -639,7 +724,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -656,11 +741,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -784,6 +865,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于-Ubuntu-搭建-Hexo-个人博客"><span class="nav-number">1.</span> <span class="nav-text">基于 Ubuntu 搭建 Hexo 个人博客]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、准备环境"><span class="nav-number">1.2.</span> <span class="nav-text">一、准备环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、安装-Git"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、安装 Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、安装Node-js"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、安装Node.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装-Hexo"><span class="nav-number">1.3.</span> <span class="nav-text">二、安装 Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、安装-cnpm"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、安装 cnpm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、安装-Hexo"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、安装 Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、测试安装成功"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、测试安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-将博客部署到-GitHub"><span class="nav-number">1.4.</span> <span class="nav-text">三、 将博客部署到 GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、注册-GitHub"><span class="nav-number">1.4.1.</span> <span class="nav-text">1、注册 GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、设置-user-name-和-user-email"><span class="nav-number">1.4.2.</span> <span class="nav-text">2、设置 user.name 和 user.email</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、生成-shh-密匙"><span class="nav-number">1.4.3.</span> <span class="nav-text">3、生成 shh 密匙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、查看-shh-密匙"><span class="nav-number">1.4.4.</span> <span class="nav-text">4、查看 shh 密匙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、在-GitHub-账户添加-SSH-key"><span class="nav-number">1.4.5.</span> <span class="nav-text">5、在 GitHub 账户添加 SSH key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、创建-GitHub-仓库"><span class="nav-number">1.4.6.</span> <span class="nav-text">6、创建 GitHub 仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、修改-hexo-配置文件"><span class="nav-number">1.4.7.</span> <span class="nav-text">7、修改 hexo 配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、部署"><span class="nav-number">1.4.8.</span> <span class="nav-text">8、部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、绑定域名"><span class="nav-number">1.5.</span> <span class="nav-text">四、绑定域名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、添加解析记录"><span class="nav-number">1.5.1.</span> <span class="nav-text">1、添加解析记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、配置-hexo"><span class="nav-number">1.5.2.</span> <span class="nav-text">2、配置 hexo</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -821,7 +918,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.1k字</span>
+  <span class="post-count">博客全站共1.5k字</span>
 </div>
         
 

@@ -135,13 +135,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zunney的博客">
-<meta property="og:url" content="//zunney.cn/tags/Ubuntu/index.html">
+  <meta name="description" content="Redhat系安装nfs时间同步完整流程">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redhat系安装nfs服务器">
+<meta property="og:url" content="//zunney.cn/2019/05/15/nfs服务搭建/index.html">
 <meta property="og:site_name" content="Zunney的博客">
+<meta property="og:description" content="Redhat系安装nfs时间同步完整流程">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-15T10:33:31.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zunney的博客">
+<meta name="twitter:title" content="Redhat系安装nfs服务器">
+<meta name="twitter:description" content="Redhat系安装nfs时间同步完整流程">
 
 
 
@@ -150,7 +155,7 @@
 
 
 
-  <link rel="canonical" href="//zunney.cn/tags/Ubuntu/">
+  <link rel="canonical" href="//zunney.cn/2019/05/15/nfs服务搭建/">
 
 
 
@@ -160,7 +165,7 @@
   };
 </script>
 
-  <title>标签: Ubuntu | Zunney的博客</title>
+  <title>Redhat系安装nfs服务器 | Zunney的博客</title>
   
 
 
@@ -209,7 +214,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -267,7 +272,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -372,79 +377,316 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Ubuntu<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/nfs服务搭建/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zunney">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zunney的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/01/20/gnome常用插件/" itemprop="url">
-              
-                <span itemprop="name">gnome常用插件</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Redhat系安装nfs服务器
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-20T14:57:06+08:00" content="2019-01-20">
-          01-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-15 18:27:13 / 修改时间：18:33:31" itemprop="dateCreated datePublished" datetime="2019-05-15T18:27:13+08:00">2019-05-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Redhat系安装nfs时间同步完整流程</p>
+</blockquote>
+<a id="more"></a>
+<p>#服务端#</p>
+<h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
+<p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+</blockquote>
+<pre><code>TYPE=Ethernet
+BOOTPROTO=static
+NAME=ens33
+DEVICE=ens33
+ONBOOT=yes
+IPADDR=192.168.242.131
+NETMASK=255.255.255.0
+</code></pre><blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote>
+<p>cd /etc/yum.repos.d/ </p>
+</blockquote>
+<blockquote>
+<p>touch qzy.repo</p>
+</blockquote>
+<blockquote>
+<p>vim qzy.repo</p>
+</blockquote>
+<pre><code>[163]
+name=163
+enabled=1
+gpgcheck=0
+baseurl=http://mirrors.163.com/centos/7/os/x86_64
+</code></pre><blockquote>
+<p>yum repolist</p>
+</blockquote>
+<h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
+<p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p>
+</blockquote>
+<h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote>
+<p>mkdir /redhat</p>
+</blockquote>
+<blockquote>
+<p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p>
+</blockquote>
+<blockquote>
+<p>exportfs -v</p>
+</blockquote>
+<h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote>
+<p>firewall-cmd –add-service=nfs –permanent</p>
+</blockquote>
+<blockquote>
+<p>firewall-cmd –add-service=mountd –permanent</p>
+</blockquote>
+<blockquote>
+<p>firewall-cmd –add-service=rpc-bind –permanent</p>
+</blockquote>
+<blockquote>
+<p>firewall-cmd –reload</p>
+</blockquote>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
+<p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+</blockquote>
+<pre><code>TYPE=Ethernet
+BOOTPROTO=static
+NAME=ens33
+DEVICE=ens33
+ONBOOT=yes
+IPADDR=192.168.242.132
+NETMASK=255.255.255.0
+</code></pre><blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote>
+<p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p>
+</blockquote>
+<blockquote>
+<p>df -h</p>
+</blockquote>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/assets/weixin.png" alt="Zunney 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/assets/zhifubao.jpg" alt="Zunney 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/15/ntp服务搭建/" rel="next" title="Redhat系安装ntp服务器">
+                <i class="fa fa-chevron-left"></i> Redhat系安装ntp服务器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/15/nextcloud搭建/" rel="prev" title="Redhat系安装NextCloud私有云">
+                Redhat系安装NextCloud私有云 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTA1My8xNzU3OA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -465,8 +707,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -632,6 +883,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络"><span class="nav-number">1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网络yum源"><span class="nav-number">2.</span> <span class="nav-text">配置网络yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件"><span class="nav-number">3.</span> <span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nfs配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改nfs配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙开端口"><span class="nav-number">5.</span> <span class="nav-text">防火墙开端口</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端"><span class="nav-number"></span> <span class="nav-text">客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络-1"><span class="nav-number">1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载nfs网络存储"><span class="nav-number">2.</span> <span class="nav-text">挂载nfs网络存储</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -779,6 +1046,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -791,6 +1062,20 @@
 
 
 
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2019/05/15/nfs服务搭建/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

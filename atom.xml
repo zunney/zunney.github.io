@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="//zunney.cn/"/>
-  <updated>2019-05-15T10:35:07.283Z</updated>
+  <updated>2019-05-16T09:54:51.733Z</updated>
   <id>//zunney.cn/</id>
   
   <author>
@@ -17,115 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Redhat系安装KVM虚拟机</title>
-    <link href="//zunney.cn/2019/05/15/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/kvm虚拟机搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:35:07.283Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装KVM虚拟机完整流程</p></blockquote><a id="more"></a><h2 id="设置网络、网桥"><a href="#设置网络、网桥" class="headerlink" title="设置网络、网桥"></a>设置网络、网桥</h2><blockquote><p>cd /etc/sysconfig/network-scripts/</p></blockquote><blockquote><p>vim ifcfg-eno16777736</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=eno16777736DEVICE=eno16777736ONBOOT=yesBRIDGE=br0</code></pre><blockquote><p>cp ifcfg-eno16777736 ifcfg-br0</p></blockquote><pre><code>TYPE=BridgeBOOTPROTO=staticDEVICE=br0NAME=br0ONBOOT=yesIPADDR=192.168.10.1NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>mkdir /mnt/hgfs</p></blockquote><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[base]name=localenabled=1gpgcheck=0baseurl=file:///mnt/hgfs</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y qemu-kvm libvirt* virt-manager </p></blockquote><h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><blockquote><p>systemctl restart libvirtd</p></blockquote><blockquote><p>virt-manager</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装KVM虚拟机完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
-    
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redhat系安装NextCloud私有云</title>
-    <link href="//zunney.cn/2019/05/15/nextcloud%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/nextcloud搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:34:31.812Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装NextCloud私有云完整流程</p></blockquote><a id="more"></a><h1 id="搭建数据库"><a href="#搭建数据库" class="headerlink" title="搭建数据库"></a>搭建数据库</h1><h2 id="检查-MariaDB-是否安装"><a href="#检查-MariaDB-是否安装" class="headerlink" title="检查 MariaDB 是否安装"></a>检查 MariaDB 是否安装</h2><blockquote><p>yum list installed | grep mariadb</p></blockquote><h2 id="卸载全部-MariaDB-相关"><a href="#卸载全部-MariaDB-相关" class="headerlink" title="卸载全部 MariaDB 相关"></a>卸载全部 MariaDB 相关</h2><blockquote><p>yum -y remove mariadb*</p></blockquote><h2 id="下载-MySQL-的-YUM-源"><a href="#下载-MySQL-的-YUM-源" class="headerlink" title="下载 MySQL 的 YUM 源"></a>下载 MySQL 的 YUM 源</h2><blockquote><p>wget <a href="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</a></p></blockquote><h2 id="安装-MySQL-的-YUM-源"><a href="#安装-MySQL-的-YUM-源" class="headerlink" title="安装 MySQL 的 YUM 源"></a>安装 MySQL 的 YUM 源</h2><blockquote><p>rpm -ivh mysql57-community-release-el7-11.noarch.rpm</p></blockquote><h2 id="检查-MySQL-的-YUM-源是否安装成功"><a href="#检查-MySQL-的-YUM-源是否安装成功" class="headerlink" title="检查 MySQL 的 YUM 源是否安装成功"></a>检查 MySQL 的 YUM 源是否安装成功</h2><blockquote><p>yum repolist enabled | grep “mysql.<em>-community.</em>“</p></blockquote><h2 id="查看-MySQL-版本"><a href="#查看-MySQL-版本" class="headerlink" title="查看 MySQL 版本"></a>查看 MySQL 版本</h2><blockquote><p>yum repolist all | grep mysql</p></blockquote><h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><blockquote><p>yum install mysql-community-server</p></blockquote><h2 id="启动-MySQL-服务"><a href="#启动-MySQL-服务" class="headerlink" title="启动 MySQL 服务"></a>启动 MySQL 服务</h2><blockquote><p>systemctl start mysqld</p></blockquote><h2 id="查看-MySQL-初始密码"><a href="#查看-MySQL-初始密码" class="headerlink" title="查看 MySQL 初始密码"></a>查看 MySQL 初始密码</h2><blockquote><p>cat /var/log/mysqld.log</p></blockquote><h2 id="测试连接-MySQL-服务"><a href="#测试连接-MySQL-服务" class="headerlink" title="测试连接 MySQL 服务"></a>测试连接 MySQL 服务</h2><blockquote><p>mysql -u root -p</p></blockquote><h2 id="修改密码强调要求"><a href="#修改密码强调要求" class="headerlink" title="修改密码强调要求"></a>修改密码强调要求</h2><blockquote><p>set global validate_password_policy=0;    #允许设置弱密码<br>set global validate_password_length=4;    #最小长度</p></blockquote><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><blockquote><p>set password for ‘root‘@’localhost’=password(‘123456’);</p></blockquote><h2 id="刷新权限"><a href="#刷新权限" class="headerlink" title="刷新权限"></a>刷新权限</h2><blockquote><p>flush privileges;</p></blockquote><h2 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h2><h1 id="安装-PHP"><a href="#安装-PHP" class="headerlink" title="安装 PHP"></a>安装 PHP</h1><p>##安装 rpm 软件包（<a href="https://webtatic.com/packages）##" target="_blank" rel="noopener">https://webtatic.com/packages）##</a></p><blockquote><p>rpm -Uvh <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a></p></blockquote><blockquote><p>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="noopener">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a></p></blockquote><h1 id="安装-PHP-7-1（前三个是必须安装的，后面是打开-Nextcloud-后提示安装的）"><a href="#安装-PHP-7-1（前三个是必须安装的，后面是打开-Nextcloud-后提示安装的）" class="headerlink" title="安装 PHP 7.1（前三个是必须安装的，后面是打开 Nextcloud 后提示安装的）"></a>安装 PHP 7.1（前三个是必须安装的，后面是打开 Nextcloud 后提示安装的）</h1><blockquote><p>yum -y install php71w php71w-devel php71w-mysqlnd php71w-xml php71w-mbstring php71w-gd</p></blockquote><h1 id="安装-Apache"><a href="#安装-Apache" class="headerlink" title="安装 Apache"></a>安装 Apache</h1><h2 id="安装-httpd"><a href="#安装-httpd" class="headerlink" title="安装 httpd"></a>安装 httpd</h2><blockquote><p>yum -y install httpd</p></blockquote><h2 id="开机启动-httpd"><a href="#开机启动-httpd" class="headerlink" title="开机启动 httpd"></a>开机启动 httpd</h2><blockquote><p>systemctl enable httpd</p></blockquote><h2 id="重新加载服务"><a href="#重新加载服务" class="headerlink" title="重新加载服务"></a>重新加载服务</h2><blockquote><p>systemctl daemon-reload</p></blockquote><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl start httpd.servic</p></blockquote><h2 id="防火墙添加-80-端口（permanent-永久）"><a href="#防火墙添加-80-端口（permanent-永久）" class="headerlink" title="防火墙添加 80 端口（permanent: 永久）"></a>防火墙添加 80 端口（permanent: 永久）</h2><blockquote><p>firewall-cmd –zone=public –add-port=80/tcp –permanent</p></blockquote><h2 id="更新防火墙规则"><a href="#更新防火墙规则" class="headerlink" title="更新防火墙规则"></a>更新防火墙规则</h2><blockquote><p>firewall-cmd –reload</p></blockquote><h1 id="部署-Nextcloud"><a href="#部署-Nextcloud" class="headerlink" title="部署 Nextcloud"></a>部署 Nextcloud</h1><h2 id="安装-wget"><a href="#安装-wget" class="headerlink" title="安装 wget"></a>安装 wget</h2><blockquote><p>yum -y install wget</p></blockquote><h2 id="移动到-Apache-部署目录"><a href="#移动到-Apache-部署目录" class="headerlink" title="移动到 Apache 部署目录"></a>移动到 Apache 部署目录</h2><blockquote><p>cd /var/www/html</p></blockquote><h2 id="下载-Nextcloud-服务端"><a href="#下载-Nextcloud-服务端" class="headerlink" title="下载 Nextcloud 服务端"></a>下载 Nextcloud 服务端</h2><blockquote><p>wget <a href="https://download.nextcloud.com/server/releases/nextcloud-15.0.7.zip" target="_blank" rel="noopener">https://download.nextcloud.com/server/releases/nextcloud-15.0.7.zip</a></p></blockquote><h2 id="安装-unzip-解压程序"><a href="#安装-unzip-解压程序" class="headerlink" title="安装 unzip 解压程序"></a>安装 unzip 解压程序</h2><blockquote><p>yum -y install unzip</p></blockquote><h2 id="解压服务端压缩包"><a href="#解压服务端压缩包" class="headerlink" title="解压服务端压缩包"></a>解压服务端压缩包</h2><blockquote><p>unzip nextcloud-15.0.7.zip</p></blockquote><h2 id="赋予目录权限（R-递归）"><a href="#赋予目录权限（R-递归）" class="headerlink" title="赋予目录权限（R: 递归）"></a>赋予目录权限（R: 递归）</h2><blockquote><p>chmod -R 777 nextcloud</p></blockquote><h2 id="永久关闭-SELinux（需重启）"><a href="#永久关闭-SELinux（需重启）" class="headerlink" title="永久关闭 SELinux（需重启）"></a>永久关闭 SELinux（需重启）</h2><blockquote><p>sed -i ‘/SELINUX/s/enforcing/disabled/‘ /etc/selinux/config</p></blockquote><h2 id="临时关闭-SELinux"><a href="#临时关闭-SELinux" class="headerlink" title="临时关闭 SELinux"></a>临时关闭 SELinux</h2><blockquote><p>setenforce 0</p></blockquote><h2 id="设置-var-lib-php-session权限"><a href="#设置-var-lib-php-session权限" class="headerlink" title="设置 var/lib/php/session权限"></a>设置 var/lib/php/session权限</h2><blockquote><p>chmod 777 /var/lib/php/*</p></blockquote><h2 id="启动-httpd"><a href="#启动-httpd" class="headerlink" title="启动 httpd"></a>启动 httpd</h2><blockquote><p>systemctl start httpd.servic</p></blockquote><h2 id="配置NextCloud"><a href="#配置NextCloud" class="headerlink" title="配置NextCloud"></a>配置NextCloud</h2><blockquote><p>浏览器打开 IP/nextcloud 配置</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装NextCloud私有云完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
-    
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redhat系安装nfs服务器</title>
-    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:33:31.805Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd –add-service=nfs –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=mountd –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=rpc-bind –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
-    
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redhat系安装ntp服务器</title>
-    <link href="//zunney.cn/2019/05/15/ntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/ntp服务搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:33:01.900Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装ntp时间同步完整流程</p></blockquote><a id="more"></a><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntp ntpdate</p></blockquote><h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><blockquote><p>vim /etc/ntp.conf</p></blockquote><pre><code>添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改防火墙"><a href="#修改防火墙" class="headerlink" title="修改防火墙"></a>修改防火墙</h2><blockquote><p>firewall-cmd –add-service=ntp –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>firewall-cmd –list-all</p></blockquote><h2 id="重启服务-1"><a href="#重启服务-1" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><blockquote><p>date -s 10:00:00</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源-1"><a href="#配置网络yum源-1" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntpdate</p></blockquote><h2 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h2><blockquote><p>ntpdate -u 192.168.242.131</p></blockquote><h2 id="查看时间"><a href="#查看时间" class="headerlink" title="查看时间"></a>查看时间</h2><blockquote><p>date</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装ntp时间同步完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
-    
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Redhat系的基础命令</title>
     <link href="//zunney.cn/2019/05/15/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
     <id>//zunney.cn/2019/05/15/基本命令/</id>
     <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:32:52.910Z</updated>
+    <updated>2019-05-16T09:54:51.733Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>Redhat系的各命令的使用</p></blockquote><a id="more"></a><h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><blockquote><p>passwd直接回车：修改当前用户的密码</p></blockquote><blockquote><p>echo  redhat | passwd –stdin root</p></blockquote><blockquote><p>echo root:passwd | chpasswd</p></blockquote><h2 id="管道"><a href="#管道" class="headerlink" title="| 管道"></a>| 管道</h2><blockquote><p>|:管道，两进程之间的链接机制</p></blockquote><blockquote><p>–stdin:基于键盘的标准输入</p></blockquote><blockquote><p>管道两边进程同时进行</p></blockquote><h2 id="linux目录结构"><a href="#linux目录结构" class="headerlink" title="linux目录结构"></a>linux目录结构</h2><blockquote><p>linux是单树形目录结构</p></blockquote><blockquote><p>/:根目录</p></blockquote><blockquote><p>/bin:普通用户可执行程序</p></blockquote><blockquote><p>/sbin:系统用户的可执行程序</p></blockquote><blockquote><p>/home:普通用户的用户家目录</p></blockquote><blockquote><p>/media:光盘挂载点</p></blockquote><blockquote><p>/mnt:自定义挂载点</p></blockquote><blockquote><p>/tmp:临时文件，自带计划任务，隔一段时间会自动删除</p></blockquote><h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><blockquote><p>普通模式</p></blockquote><pre><code>shift+d(D)：删除光标当前位置到行位。yy：复制一行p：粘贴u：回滚dd：删除一行y3↓：向下复制三行d3下：向下删除三行shift+g：将光标快速定位到文本末端gg：将光标快速定位到文本最前端Ctrl+v：块选择shift+v：行选择</code></pre><blockquote><p>编辑模式</p></blockquote><pre><code>i:直接进入编辑模式I：跟小写一样，无差异o：向下换行进入编辑模式O：向上换行进入编辑模式a：光标向后移一位进入编辑模式A：光标向前移以为进入编辑模式s：删除当前字符进入编辑模式S：删除当前行进入编辑模式</code></pre><blockquote><p>搜索模式</p></blockquote><pre><code>n:光标跟着关键字往下走N光标跟着关键字往上走</code></pre><blockquote><p>命令行模式</p></blockquote><pre><code>w：保存q：退出q!：强制退出wq：保存退出!：强制wq!：强制保存退出set number:显示行号set no number:不显示行号14：定位到文本14行</code></pre><h2 id="date日期时间"><a href="#date日期时间" class="headerlink" title="date日期时间"></a>date日期时间</h2><blockquote><p>date:显示时间</p></blockquote><blockquote><p>date -s 2019-5-11：修改日期</p></blockquote><blockquote><p>date -s 10:00:00：修改时间</p></blockquote><blockquote><p>date -s “2019-5-11 10:00:00” ：修改日期时间</p></blockquote><h2 id="cal日历"><a href="#cal日历" class="headerlink" title="cal日历"></a>cal日历</h2><blockquote><p>cal：显示日历</p></blockquote><blockquote><p>cal 05 2018：显示2018年5月日历</p></blockquote><blockquote><p>cal 2018：显示2018年日历</p></blockquote><h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><blockquote><p>-r：递归</p></blockquote><blockquote><p>cp文件的selinux属性随着目的的属性而变化</p></blockquote><h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote><p>mv文件的selinux属性跟着原属性走</p></blockquote><h2 id="pwd当前目录"><a href="#pwd当前目录" class="headerlink" title="pwd当前目录"></a>pwd当前目录</h2><blockquote><p>pwd:查看当前工作目录</p></blockquote><h2 id="rm删除"><a href="#rm删除" class="headerlink" title="rm删除"></a>rm删除</h2><blockquote><p>-f：强制<br>-r：递归<br>-v：显示执行过程</p></blockquote><h2 id="gt-重定向"><a href="#gt-重定向" class="headerlink" title="&gt;重定向"></a>&gt;重定向</h2><blockquote><p>–stdin：标准输入</p></blockquote><blockquote><p>–stdout：标准输出</p></blockquote><blockquote><p>–stderr：标准错误</p></blockquote><pre><code>&gt; ：标准输出重定向（会覆盖文件所以内容，会损坏源文件）&gt;&gt;：标准输出的追加（最文本最末段添加，不会损坏源文件）&amp;&gt;：任何重定向2&gt;：标准错误的重定向2&gt;&gt;：标准错误的追加&amp;&gt;&gt;：任何追加</code></pre><h2 id="文件和文件夹的权限"><a href="#文件和文件夹的权限" class="headerlink" title="文件和文件夹的权限"></a>文件和文件夹的权限</h2><blockquote><p>文件：合理权限至少是3以上的偶数（644）</p></blockquote><blockquote><p>文件夹：合理权限至少是3以上的偶数（755）</p></blockquote><h2 id="find查找"><a href="#find查找" class="headerlink" title="find查找"></a>find查找</h2><blockquote><p>find + 路径 + 选项</p></blockquote><pre><code>-name：按名称-group：按组查询-user：按用户查询-mtime +1：一天前-mtime +1：一天后</code></pre><h2 id="文本处理工具"><a href="#文本处理工具" class="headerlink" title="文本处理工具"></a>文本处理工具</h2><blockquote><p>cat：查看文本中全部内容</p></blockquote><blockquote><p>more：查看文本中全部内容，第一行开始，一屏显示完后左下角有百分比，回车翻一行，空格翻一页</p></blockquote><blockquote><p>less：跟more对应，查看文本中全部内容，第一行开始，回车翻一行，空格翻一页，不会自动退出，退出按q</p></blockquote><blockquote><p>grep：文本过滤</p></blockquote><blockquote><p>head：默认显示开头十行，-n指定行数</p></blockquote><blockquote><p>tail：跟head对应，默认显示最后十行，-n指定行数</p></blockquote><blockquote><p>wc：统计</p></blockquote><pre><code> 19   27  846   passwd行数 单词 字节数 文件名</code></pre><blockquote><p>sort：默认字母顺序显示全部 </p></blockquote><pre><code>-d：字母顺序排列-r：字母倒叙排列-u：去重（重复的只显示一个）</code></pre><blockquote><p>cut：切割</p></blockquote><pre><code>-d：指定切割点-f：指定字段</code></pre><h2 id="process进程"><a href="#process进程" class="headerlink" title="process进程"></a>process进程</h2><blockquote><p>ps：查看进程</p></blockquote><pre><code>-a：所有-u：用户-x：不连续终端user：用户pid：进程号cpu：CPU占用率mem：内存使用率vsz：虚拟内存使用率rss：真实内存使用tty：终端stat：状态start：起始时间time：使用时间command：执行的操作</code></pre><blockquote><p>kill：杀死进程</p></blockquote><pre><code>-9：立即杀死（强按电源4秒强杀进程）-15：整节杀死（正常关机杀死进程）</code></pre><blockquote><p>在vim管理器普通模式下Ctrl+z将任务放入后台</p></blockquote><blockquote><p>jobs：查看后台进程</p></blockquote><blockquote><p>fg：调用恢复后台进程</p></blockquote><h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2><blockquote><p>at：一次计划任务</p></blockquote><pre><code>-l：查看-c 作业号：查看计划内容-d 作业号：删除计划任务</code></pre><blockquote><p>crontab：周而复始的计划任务</p></blockquote><pre><code>-e：编辑-u：用户*    *    *    *    *        command分    时    日    月    周        命令限制普通用户不能做计划任务：vim /etc/at.denyvim /etc/cron.deny允许用户做计划任务：touch /etc/cron.allow(一旦生产，全局生效，只允许这文件的用户做一次性计划任务，优先级大于at.deny)touch /etc/cron.allow(一旦生产，全局生效，只允许这文件的用户做周而复始的计划任务，优先级大于cron.deny)</code></pre><h2 id="磁盘类型"><a href="#磁盘类型" class="headerlink" title="磁盘类型"></a>磁盘类型</h2><blockquote><p>IDE接口：hard disk(hd)<br>SATA/USB/SCSI接口：sata disk(sd)</p></blockquote><h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><blockquote><p>fdisk /dev/sdb</p></blockquote><pre><code>n：新建分区p：打印分区d：删除分区t：更改分区idg：改为gpt架构l：列举已知的分区类型m：打印帮助手册w：保存q：退出</code></pre><blockquote><p>分区类型：</p></blockquote><pre><code>主分区：最多4个，编号是1---4扩展分区：如果有，最多一个逻辑分区：是在扩展分区之下去做的。（不做扩展分区就不能做逻辑分区，编号从5开始）</code></pre><blockquote><p>partprobe：磁盘探测</p></blockquote><pre><code>rhel 5/7：partproberhel 6：partx -a：需执行两次</code></pre><blockquote><p>mkfs.xfs /dev/sdb1：重建系统文件（格式化）</p></blockquote><h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><blockquote><p>mount：（临时挂载）</p></blockquote><blockquote><p>vim /etc/fstab：（永久挂载） </p></blockquote><pre><code>/dev/sdb1    /mnt/hgfs    ext4    defaults    1    11：资源（设备，远程挂载服务）2：挂载点3：文件系统（也就是你格式化的那个玩意儿）4：选项（默认都是defaults，defaults包含了一个非常重要的选项，那就是rw权限）5：开机是否备份，0表示不备份，1表示备份6：开机是否检测，0表示不检测，1表示检测1次，2检测2次注意：一个资源可以挂多个地方，一个地方不能挂多个资源</code></pre><h2 id="逻辑卷"><a href="#逻辑卷" class="headerlink" title="逻辑卷"></a>逻辑卷</h2><blockquote><p>物理分区做成物理卷</p></blockquote><pre><code>pvcreate /dev/sdb{5,6}</code></pre><blockquote><p>将物理卷组成卷组</p></blockquote><pre><code>vgcreate redhat -s 16 /dev/sdb{5,6}#-s：指定PE大小#redhat：指定卷组名</code></pre><blockquote><p>pvs<br>    Fmt：物理卷元数据格式<br>    Attr：物理卷元数据格式（lvm2 或者 lvm1）<br>    PSize：物理卷大小<br>    PFree：物理卷中的剩余空间<br>    Start：物理卷片段的起始物理扩展<br>    SSize：物理卷的片段大小</p></blockquote><blockquote><p>划分逻辑卷</p></blockquote><pre><code>#第一种方式：直接指定逻辑卷大小，使用的-Llvcreate -L 4G redhat -n cisco#第二种：使用PE大小创建逻辑卷lvcreate -l 50  redhat -n cisco</code></pre>]]></content>
     
@@ -137,9 +33,113 @@
     
     </summary>
     
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redhat系安装KVM虚拟机</title>
+    <link href="//zunney.cn/2019/05/15/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/kvm虚拟机搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:23.250Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装KVM虚拟机完整流程</p></blockquote><a id="more"></a><h2 id="设置网络、网桥"><a href="#设置网络、网桥" class="headerlink" title="设置网络、网桥"></a>设置网络、网桥</h2><blockquote><p>cd /etc/sysconfig/network-scripts/</p></blockquote><blockquote><p>vim ifcfg-eno16777736</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=eno16777736DEVICE=eno16777736ONBOOT=yesBRIDGE=br0</code></pre><blockquote><p>cp ifcfg-eno16777736 ifcfg-br0</p></blockquote><pre><code>TYPE=BridgeBOOTPROTO=staticDEVICE=br0NAME=br0ONBOOT=yesIPADDR=192.168.10.1NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>mkdir /mnt/hgfs</p></blockquote><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[base]name=localenabled=1gpgcheck=0baseurl=file:///mnt/hgfs</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y qemu-kvm libvirt* virt-manager </p></blockquote><h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><blockquote><p>systemctl restart libvirtd</p></blockquote><blockquote><p>virt-manager</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装KVM虚拟机完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redhat系安装NextCloud私有云</title>
+    <link href="//zunney.cn/2019/05/15/nextcloud%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/nextcloud搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:32.864Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装NextCloud私有云完整流程</p></blockquote><a id="more"></a><h1 id="搭建数据库"><a href="#搭建数据库" class="headerlink" title="搭建数据库"></a>搭建数据库</h1><h2 id="检查-MariaDB-是否安装"><a href="#检查-MariaDB-是否安装" class="headerlink" title="检查 MariaDB 是否安装"></a>检查 MariaDB 是否安装</h2><blockquote><p>yum list installed | grep mariadb</p></blockquote><h2 id="卸载全部-MariaDB-相关"><a href="#卸载全部-MariaDB-相关" class="headerlink" title="卸载全部 MariaDB 相关"></a>卸载全部 MariaDB 相关</h2><blockquote><p>yum -y remove mariadb*</p></blockquote><h2 id="下载-MySQL-的-YUM-源"><a href="#下载-MySQL-的-YUM-源" class="headerlink" title="下载 MySQL 的 YUM 源"></a>下载 MySQL 的 YUM 源</h2><blockquote><p>wget <a href="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</a></p></blockquote><h2 id="安装-MySQL-的-YUM-源"><a href="#安装-MySQL-的-YUM-源" class="headerlink" title="安装 MySQL 的 YUM 源"></a>安装 MySQL 的 YUM 源</h2><blockquote><p>rpm -ivh mysql57-community-release-el7-11.noarch.rpm</p></blockquote><h2 id="检查-MySQL-的-YUM-源是否安装成功"><a href="#检查-MySQL-的-YUM-源是否安装成功" class="headerlink" title="检查 MySQL 的 YUM 源是否安装成功"></a>检查 MySQL 的 YUM 源是否安装成功</h2><blockquote><p>yum repolist enabled | grep “mysql.<em>-community.</em>“</p></blockquote><h2 id="查看-MySQL-版本"><a href="#查看-MySQL-版本" class="headerlink" title="查看 MySQL 版本"></a>查看 MySQL 版本</h2><blockquote><p>yum repolist all | grep mysql</p></blockquote><h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><blockquote><p>yum install mysql-community-server</p></blockquote><h2 id="启动-MySQL-服务"><a href="#启动-MySQL-服务" class="headerlink" title="启动 MySQL 服务"></a>启动 MySQL 服务</h2><blockquote><p>systemctl start mysqld</p></blockquote><h2 id="查看-MySQL-初始密码"><a href="#查看-MySQL-初始密码" class="headerlink" title="查看 MySQL 初始密码"></a>查看 MySQL 初始密码</h2><blockquote><p>cat /var/log/mysqld.log</p></blockquote><h2 id="测试连接-MySQL-服务"><a href="#测试连接-MySQL-服务" class="headerlink" title="测试连接 MySQL 服务"></a>测试连接 MySQL 服务</h2><blockquote><p>mysql -u root -p</p></blockquote><h2 id="修改密码强调要求"><a href="#修改密码强调要求" class="headerlink" title="修改密码强调要求"></a>修改密码强调要求</h2><blockquote><p>set global validate_password_policy=0;    #允许设置弱密码<br>set global validate_password_length=4;    #最小长度</p></blockquote><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><blockquote><p>set password for ‘root‘@’localhost’=password(‘123456’);</p></blockquote><h2 id="刷新权限"><a href="#刷新权限" class="headerlink" title="刷新权限"></a>刷新权限</h2><blockquote><p>flush privileges;</p></blockquote><h2 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h2><h1 id="安装-PHP"><a href="#安装-PHP" class="headerlink" title="安装 PHP"></a>安装 PHP</h1><p>##安装 rpm 软件包（<a href="https://webtatic.com/packages）##" target="_blank" rel="noopener">https://webtatic.com/packages）##</a></p><blockquote><p>rpm -Uvh <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a></p></blockquote><blockquote><p>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="noopener">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a></p></blockquote><h1 id="安装-PHP-7-1（前三个是必须安装的，后面是打开-Nextcloud-后提示安装的）"><a href="#安装-PHP-7-1（前三个是必须安装的，后面是打开-Nextcloud-后提示安装的）" class="headerlink" title="安装 PHP 7.1（前三个是必须安装的，后面是打开 Nextcloud 后提示安装的）"></a>安装 PHP 7.1（前三个是必须安装的，后面是打开 Nextcloud 后提示安装的）</h1><blockquote><p>yum -y install php71w php71w-devel php71w-mysqlnd php71w-xml php71w-mbstring php71w-gd</p></blockquote><h1 id="安装-Apache"><a href="#安装-Apache" class="headerlink" title="安装 Apache"></a>安装 Apache</h1><h2 id="安装-httpd"><a href="#安装-httpd" class="headerlink" title="安装 httpd"></a>安装 httpd</h2><blockquote><p>yum -y install httpd</p></blockquote><h2 id="开机启动-httpd"><a href="#开机启动-httpd" class="headerlink" title="开机启动 httpd"></a>开机启动 httpd</h2><blockquote><p>systemctl enable httpd</p></blockquote><h2 id="重新加载服务"><a href="#重新加载服务" class="headerlink" title="重新加载服务"></a>重新加载服务</h2><blockquote><p>systemctl daemon-reload</p></blockquote><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl start httpd.servic</p></blockquote><h2 id="防火墙添加-80-端口（permanent-永久）"><a href="#防火墙添加-80-端口（permanent-永久）" class="headerlink" title="防火墙添加 80 端口（permanent: 永久）"></a>防火墙添加 80 端口（permanent: 永久）</h2><blockquote><p>firewall-cmd –zone=public –add-port=80/tcp –permanent</p></blockquote><h2 id="更新防火墙规则"><a href="#更新防火墙规则" class="headerlink" title="更新防火墙规则"></a>更新防火墙规则</h2><blockquote><p>firewall-cmd –reload</p></blockquote><h1 id="部署-Nextcloud"><a href="#部署-Nextcloud" class="headerlink" title="部署 Nextcloud"></a>部署 Nextcloud</h1><h2 id="安装-wget"><a href="#安装-wget" class="headerlink" title="安装 wget"></a>安装 wget</h2><blockquote><p>yum -y install wget</p></blockquote><h2 id="移动到-Apache-部署目录"><a href="#移动到-Apache-部署目录" class="headerlink" title="移动到 Apache 部署目录"></a>移动到 Apache 部署目录</h2><blockquote><p>cd /var/www/html</p></blockquote><h2 id="下载-Nextcloud-服务端"><a href="#下载-Nextcloud-服务端" class="headerlink" title="下载 Nextcloud 服务端"></a>下载 Nextcloud 服务端</h2><blockquote><p>wget <a href="https://download.nextcloud.com/server/releases/nextcloud-15.0.7.zip" target="_blank" rel="noopener">https://download.nextcloud.com/server/releases/nextcloud-15.0.7.zip</a></p></blockquote><h2 id="安装-unzip-解压程序"><a href="#安装-unzip-解压程序" class="headerlink" title="安装 unzip 解压程序"></a>安装 unzip 解压程序</h2><blockquote><p>yum -y install unzip</p></blockquote><h2 id="解压服务端压缩包"><a href="#解压服务端压缩包" class="headerlink" title="解压服务端压缩包"></a>解压服务端压缩包</h2><blockquote><p>unzip nextcloud-15.0.7.zip</p></blockquote><h2 id="赋予目录权限（R-递归）"><a href="#赋予目录权限（R-递归）" class="headerlink" title="赋予目录权限（R: 递归）"></a>赋予目录权限（R: 递归）</h2><blockquote><p>chmod -R 777 nextcloud</p></blockquote><h2 id="永久关闭-SELinux（需重启）"><a href="#永久关闭-SELinux（需重启）" class="headerlink" title="永久关闭 SELinux（需重启）"></a>永久关闭 SELinux（需重启）</h2><blockquote><p>sed -i ‘/SELINUX/s/enforcing/disabled/‘ /etc/selinux/config</p></blockquote><h2 id="临时关闭-SELinux"><a href="#临时关闭-SELinux" class="headerlink" title="临时关闭 SELinux"></a>临时关闭 SELinux</h2><blockquote><p>setenforce 0</p></blockquote><h2 id="设置-var-lib-php-session权限"><a href="#设置-var-lib-php-session权限" class="headerlink" title="设置 var/lib/php/session权限"></a>设置 var/lib/php/session权限</h2><blockquote><p>chmod 777 /var/lib/php/*</p></blockquote><h2 id="启动-httpd"><a href="#启动-httpd" class="headerlink" title="启动 httpd"></a>启动 httpd</h2><blockquote><p>systemctl start httpd.servic</p></blockquote><h2 id="配置NextCloud"><a href="#配置NextCloud" class="headerlink" title="配置NextCloud"></a>配置NextCloud</h2><blockquote><p>浏览器打开 IP/nextcloud 配置</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装NextCloud私有云完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redhat系安装ntp服务器</title>
+    <link href="//zunney.cn/2019/05/15/ntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/ntp服务搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:46.183Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装ntp时间同步完整流程</p></blockquote><a id="more"></a><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntp ntpdate</p></blockquote><h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><blockquote><p>vim /etc/ntp.conf</p></blockquote><pre><code>添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改防火墙"><a href="#修改防火墙" class="headerlink" title="修改防火墙"></a>修改防火墙</h2><blockquote><p>firewall-cmd –add-service=ntp –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>firewall-cmd –list-all</p></blockquote><h2 id="重启服务-1"><a href="#重启服务-1" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><blockquote><p>date -s 10:00:00</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源-1"><a href="#配置网络yum源-1" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntpdate</p></blockquote><h2 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h2><blockquote><p>ntpdate -u 192.168.242.131</p></blockquote><h2 id="查看时间"><a href="#查看时间" class="headerlink" title="查看时间"></a>查看时间</h2><blockquote><p>date</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装ntp时间同步完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redhat系安装nfs服务器</title>
+    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:40.131Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd –add-service=nfs –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=mountd –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=rpc-bind –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
     
     
       <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
@@ -151,7 +151,7 @@
     <link href="//zunney.cn/2019/05/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85/"/>
     <id>//zunney.cn/2019/05/15/数据库的安装/</id>
     <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:32:32.973Z</updated>
+    <updated>2019-05-16T09:54:58.831Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>Redhat安装数据库完整流程</p></blockquote><a id="more"></a><h2 id="检查-MariaDB-是否安装"><a href="#检查-MariaDB-是否安装" class="headerlink" title="检查 MariaDB 是否安装"></a>检查 MariaDB 是否安装</h2><blockquote><p>yum list installed | grep mariadb</p></blockquote><h2 id="卸载全部-MariaDB-相关"><a href="#卸载全部-MariaDB-相关" class="headerlink" title="卸载全部 MariaDB 相关"></a>卸载全部 MariaDB 相关</h2><blockquote><p>yum -y remove mariadb*</p></blockquote><h2 id="下载-MySQL-的-YUM-源"><a href="#下载-MySQL-的-YUM-源" class="headerlink" title="下载 MySQL 的 YUM 源"></a>下载 MySQL 的 YUM 源</h2><blockquote><p>wget <a href="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</a></p></blockquote><h2 id="安装-MySQL-的-YUM-源"><a href="#安装-MySQL-的-YUM-源" class="headerlink" title="安装 MySQL 的 YUM 源"></a>安装 MySQL 的 YUM 源</h2><blockquote><p>rpm -ivh mysql57-community-release-el7-11.noarch.rpm</p></blockquote><h2 id="检查-MySQL-的-YUM-源是否安装成功"><a href="#检查-MySQL-的-YUM-源是否安装成功" class="headerlink" title="检查 MySQL 的 YUM 源是否安装成功"></a>检查 MySQL 的 YUM 源是否安装成功</h2><blockquote><p>yum repolist enabled | grep “mysql.<em>-community.</em>“</p></blockquote><h2 id="查看-MySQL-版本"><a href="#查看-MySQL-版本" class="headerlink" title="查看 MySQL 版本"></a>查看 MySQL 版本</h2><blockquote><p>yum repolist all | grep mysql</p></blockquote><h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><blockquote><p>yum install mysql-community-server</p></blockquote><h2 id="启动-MySQL-服务"><a href="#启动-MySQL-服务" class="headerlink" title="启动 MySQL 服务"></a>启动 MySQL 服务</h2><blockquote><p>systemctl start mysqld</p></blockquote><h2 id="查看-MySQL-初始密码"><a href="#查看-MySQL-初始密码" class="headerlink" title="查看 MySQL 初始密码"></a>查看 MySQL 初始密码</h2><blockquote><p>cat /var/log/mysqld.log</p></blockquote><h2 id="测试连接-MySQL-服务"><a href="#测试连接-MySQL-服务" class="headerlink" title="测试连接 MySQL 服务"></a>测试连接 MySQL 服务</h2><blockquote><p>mysql -u root -p</p></blockquote><h2 id="修改密码强调要求"><a href="#修改密码强调要求" class="headerlink" title="修改密码强调要求"></a>修改密码强调要求</h2><blockquote><p>set global validate_password_policy=0;    #允许设置弱密码<br>set global validate_password_length=4;    #最小长度</p></blockquote><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><blockquote><p>set password for ‘root‘@’localhost’=password(‘123456’);</p></blockquote><h2 id="刷新权限"><a href="#刷新权限" class="headerlink" title="刷新权限"></a>刷新权限</h2><blockquote><p>flush privileges;</p></blockquote><h2 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h2><blockquote><p>开放 3306 端口：</p></blockquote><blockquote><p>firewall-cmd –permanent –zone=public –add-port=3306/tcp</p></blockquote><blockquote><p>firewall-cmd –permanent –zone=public –add-port=3306/udp</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>如果是 CentOS 7，需要将 MySQL 服务加入防火墙，然后重启防火墙：</p></blockquote><blockquote><p>firewall-cmd –zone=public –permanent –add-service=mysql</p></blockquote><blockquote><p>systemctl restart firewalld</p></blockquote><h2 id="设置允许远程访问"><a href="#设置允许远程访问" class="headerlink" title="设置允许远程访问"></a>设置允许远程访问</h2><blockquote><p>grant all privileges on <em>.</em> to root@”%” identified by ‘0’;</p></blockquote><blockquote><p>flush privileges;</p></blockquote><h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><blockquote><p>systemctl start mysqld    #启动mysql</p></blockquote><blockquote><p>systemctl stop mysqld    #停止mysqld&gt;</p></blockquote><blockquote><p>systemctl restart mysqld    #重启mysqld</p></blockquote><blockquote><p>systemctl enable mysqld    #设置开机启动</p></blockquote><blockquote><p>systemctl status mysqld    #查看 MySQL Server 状态</p></blockquote><h2 id="防火墙相关："><a href="#防火墙相关：" class="headerlink" title="防火墙相关："></a>防火墙相关：</h2><blockquote><p>systemctl status firewalld    #查看防火墙状态</p></blockquote><blockquote><p>systemctl start firewalld    #打开防火墙</p></blockquote><blockquote><p>systemctl stop firewalld    #关闭防火墙</p></blockquote><blockquote><p>systemctl restart firewalld    #重启防火墙</p></blockquote>]]></content>
     
@@ -163,9 +163,9 @@
     
     </summary>
     
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
     
     
       <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
@@ -177,7 +177,7 @@
     <link href="//zunney.cn/2019/05/15/%E7%BD%91%E5%8D%A1%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88/"/>
     <id>//zunney.cn/2019/05/15/网卡链路聚合/</id>
     <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-15T10:32:43.166Z</updated>
+    <updated>2019-05-16T09:55:03.541Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>Redhat系网卡的链路聚合完整流程</p></blockquote><a id="more"></a><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y gcc git vim net-tools</p></blockquote><h2 id="拷贝配置模板"><a href="#拷贝配置模板" class="headerlink" title="拷贝配置模板"></a>拷贝配置模板</h2><blockquote><p>cd  /usr/share/doc/teamd-1.25/example_ifcfgs/3</p></blockquote><blockquote><p>cp * /etc/sysconfig/network-scripts/ -v</p></blockquote><h2 id="查看记住网卡名称"><a href="#查看记住网卡名称" class="headerlink" title="查看记住网卡名称"></a>查看记住网卡名称</h2><blockquote><p>ifconfig</p></blockquote><h2 id="更改网卡配置文件名与查看到的相对应"><a href="#更改网卡配置文件名与查看到的相对应" class="headerlink" title="更改网卡配置文件名与查看到的相对应"></a>更改网卡配置文件名与查看到的相对应</h2><blockquote><p>mv ifcfg-eth1 ifcfg-ens37<br>mv ifcfg-eth2 ifcfg-ens38</p></blockquote><h2 id="更改网卡配置文件"><a href="#更改网卡配置文件" class="headerlink" title="更改网卡配置文件"></a>更改网卡配置文件</h2><blockquote><p>vim ifcfg-ens37</p></blockquote><pre><code>DEVICE=&quot;ens37&quot;DEVICETYPE=&quot;TeamPort&quot;ONBOOT=&quot;yes&quot;TEAM_MASTER=&quot;team_test0&quot;TEAM_PORT_CONFIG=&apos;{&quot;prio&quot;: -10, &quot;sticky&quot;: true}&apos;</code></pre><blockquote><p>vim ifcfg-ens38</p></blockquote><pre><code>DEVICE=&quot;ens38&quot;DEVICETYPE=&quot;TeamPort&quot;ONBOOT=&quot;yes&quot;TEAM_MASTER=&quot;team_test0&quot;TEAM_PORT_CONFIG=&apos;{&quot;prio&quot;: -10, &quot;sticky&quot;: true}&apos;</code></pre><blockquote><p>cat ifcfg-team_test0 </p></blockquote><pre><code>DEVICE=&quot;team_test0&quot;DEVICETYPE=&quot;Team&quot;ONBOOT=&quot;yes&quot;BOOTPROTO=noneNETMASK=255.255.255.0IPADDR=192.168.9.66TEAM_CONFIG=&apos;{&quot;runner&quot;: {&quot;name&quot;: &quot;activebackup&quot;}}&apos;</code></pre><h2 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h2><blockquote><p>systemctl restart network</p></blockquote><h2 id="查看聚合链路"><a href="#查看聚合链路" class="headerlink" title="查看聚合链路"></a>查看聚合链路</h2><blockquote><p>teamdctl team_test0 state</p></blockquote><h2 id="查看网卡"><a href="#查看网卡" class="headerlink" title="查看网卡"></a>查看网卡</h2><blockquote><p>nmcli connection show</p></blockquote>]]></content>
     
@@ -189,9 +189,9 @@
     
     </summary>
     
-      <category term="Linux" scheme="//zunney.cn/categories/Linux/"/>
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="学习" scheme="//zunney.cn/categories/Linux/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
     
     
       <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>

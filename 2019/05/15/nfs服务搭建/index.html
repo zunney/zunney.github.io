@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Zunney的博客">
 <meta property="og:description" content="Redhat系安装nfs时间同步完整流程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-16T09:54:40.131Z">
+<meta property="og:updated_time" content="2019-05-18T06:40:04.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redhat系安装nfs服务器">
 <meta name="twitter:description" content="Redhat系安装nfs时间同步完整流程">
@@ -456,7 +456,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 17:54:40" itemprop="dateModified" datetime="2019-05-16T17:54:40+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-18 14:40:04" itemprop="dateModified" datetime="2019-05-18T14:40:04+08:00">2019-05-18</time>
               
             
           </span>
@@ -573,6 +573,18 @@ baseurl=http://mirrors.163.com/centos/7/os/x86_64
 <blockquote>
 <p>firewall-cmd –reload</p>
 </blockquote>
+<h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote>
+<p>systemctl restart nfs</p>
+</blockquote>
+<blockquote>
+<p>systemctl restart rpcbind</p>
+</blockquote>
+<blockquote>
+<p>systemctl enable nfs</p>
+</blockquote>
+<blockquote>
+<p>systemctl enable rpcbind</p>
+</blockquote>
 <h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
 <p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
 </blockquote>
@@ -585,6 +597,21 @@ IPADDR=192.168.242.132
 NETMASK=255.255.255.0
 </code></pre><blockquote>
 <p>systemctl restart network</p>
+</blockquote>
+<h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
+<p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p>
+</blockquote>
+<h2 id="开启服务-1"><a href="#开启服务-1" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote>
+<p>systemctl restart nfs</p>
+</blockquote>
+<blockquote>
+<p>systemctl restart rpcbind</p>
+</blockquote>
+<blockquote>
+<p>systemctl enable nfs</p>
+</blockquote>
+<blockquote>
+<p>systemctl enable rpcbind</p>
 </blockquote>
 <h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote>
 <p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p>
@@ -657,8 +684,8 @@ NETMASK=255.255.255.0
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/20/gnome常用插件/" rel="next" title="gnome常用插件">
-                <i class="fa fa-chevron-left"></i> gnome常用插件
+              <a href="/2019/05/15/kvm虚拟机搭建/" rel="next" title="Redhat系安装KVM虚拟机">
+                <i class="fa fa-chevron-left"></i> Redhat系安装KVM虚拟机
               </a>
             
           </div>
@@ -667,8 +694,8 @@ NETMASK=255.255.255.0
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/15/网卡链路聚合/" rel="prev" title="Redhat系网卡链路聚合">
-                Redhat系网卡链路聚合 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/15/nextcloud搭建/" rel="prev" title="Redhat系安装NextCloud私有云">
+                Redhat系安装NextCloud私有云 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -748,7 +775,7 @@ NETMASK=255.255.255.0
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -904,7 +931,7 @@ NETMASK=255.255.255.0
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络"><span class="nav-number">1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网络yum源"><span class="nav-number">2.</span> <span class="nav-text">配置网络yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件"><span class="nav-number">3.</span> <span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nfs配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改nfs配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙开端口"><span class="nav-number">5.</span> <span class="nav-text">防火墙开端口</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端"><span class="nav-number"></span> <span class="nav-text">客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络-1"><span class="nav-number">1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载nfs网络存储"><span class="nav-number">2.</span> <span class="nav-text">挂载nfs网络存储</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络"><span class="nav-number">1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网络yum源"><span class="nav-number">2.</span> <span class="nav-text">配置网络yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件"><span class="nav-number">3.</span> <span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nfs配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改nfs配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙开端口"><span class="nav-number">5.</span> <span class="nav-text">防火墙开端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启服务"><span class="nav-number">6.</span> <span class="nav-text">开启服务</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端"><span class="nav-number"></span> <span class="nav-text">客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络-1"><span class="nav-number">1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件-1"><span class="nav-number">2.</span> <span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启服务-1"><span class="nav-number">3.</span> <span class="nav-text">开启服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载nfs网络存储"><span class="nav-number">4.</span> <span class="nav-text">挂载nfs网络存储</span></a></li></ol></li></div>
             
 
           </div>
@@ -948,7 +975,7 @@ NETMASK=255.255.255.0
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.8k字</span>
+  <span class="post-count">博客全站共6k字</span>
 </div>
         
 

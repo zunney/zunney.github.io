@@ -47,40 +47,14 @@
     <link href="//zunney.cn/2019/05/18/autofs%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD/"/>
     <id>//zunney.cn/2019/05/18/autofs自动挂载/</id>
     <published>2019-05-18T03:00:13.000Z</published>
-    <updated>2019-05-18T03:17:49.006Z</updated>
+    <updated>2019-05-18T03:27:30.906Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装autofs时间同步完整流程</p></blockquote><a id="more"></a><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y autofs*</p></blockquote><h2 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h2><blockquote><p>systemctl enable autofs</p></blockquote><h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart autofs</p></blockquote><h2 id="创建映射文件"><a href="#创建映射文件" class="headerlink" title="创建映射文件"></a>创建映射文件</h2><blockquote><p>/etc/auto.fire #创建auto.*的文件</p></blockquote><h2 id="创建硬件资源"><a href="#创建硬件资源" class="headerlink" title="创建硬件资源"></a>创建硬件资源</h2><blockquote><p>fdisk创建分区（自行创建，步骤已省略）</p></blockquote><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><blockquote><p>vim /etc/auto.master /etc/auto.fire -O</p></blockquote><pre><code>    主配置文件配置：/mnt/cdrom      /etc/auto.fire  --timeout=30    挂载点            映射文件名           超时时间    映射文件配置：map     -fstype=iso9660         :/dev/cdrom触发点    挂载选项，文件类型            硬资源map     -ro,soft,intr         192.168.10.1:/tmp/hub触发点        挂载选项                    软资源</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart autofs</p></blockquote><h2 id="触发"><a href="#触发" class="headerlink" title="触发"></a>触发</h2><blockquote><p>ls /mnt/cdrom/map<br>cd /mnt/cdrom/map</p></blockquote><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><blockquote><p>df -h</p></blockquote><h3 id="注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab"><a href="#注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab" class="headerlink" title="注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab"></a>注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab</h3><h3 id="触发点为了更方便的挂载，一定是一个目录"><a href="#触发点为了更方便的挂载，一定是一个目录" class="headerlink" title="触发点为了更方便的挂载，一定是一个目录"></a>触发点为了更方便的挂载，一定是一个目录</h3>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装autofs时间同步完整流程</p></blockquote><a id="more"></a><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y autofs*</p></blockquote><h2 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h2><blockquote><p>systemctl enable autofs</p></blockquote><h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart autofs</p></blockquote><h2 id="创建映射文件"><a href="#创建映射文件" class="headerlink" title="创建映射文件"></a>创建映射文件</h2><blockquote><p>/etc/auto.fire #创建auto.*的文件</p></blockquote><h2 id="创建硬件资源"><a href="#创建硬件资源" class="headerlink" title="创建硬件资源"></a>创建硬件资源</h2><blockquote><p>fdisk创建分区（自行创建，步骤已省略）</p></blockquote><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><blockquote><p>vim /etc/auto.master /etc/auto.fire -O</p></blockquote><pre><code>    主配置文件配置：/mnt/cdrom      /etc/auto.fire  --timeout=30    挂载点            映射文件名           超时时间    映射文件配置：map     -fstype=iso9660         :/dev/cdrom触发点    挂载选项，文件类型            硬资源map     -ro,soft,intr         192.168.10.1:/tmp/hub触发点        挂载选项                    软资源</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart autofs</p></blockquote><h2 id="触发"><a href="#触发" class="headerlink" title="触发"></a>触发</h2><blockquote><p>ls /mnt/cdrom/map<br>cd /mnt/cdrom/map</p></blockquote><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><blockquote><p>df -h</p></blockquote><h3 id="注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab"><a href="#注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab" class="headerlink" title="注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab"></a>注意：该服务（配置文件，映射文件）不能使用空格，只能使用tab</h3><h3 id="触发点为了更方便的挂载，一定是一个目录"><a href="#触发点为了更方便的挂载，一定是一个目录" class="headerlink" title="触发点为了更方便的挂载，一定是一个目录"></a>触发点为了更方便的挂载，一定是一个目录</h3>]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;Redhat系安装autofs时间同步完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redhat系安装nfs服务器</title>
-    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-16T09:54:40.131Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd –add-service=nfs –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=mountd –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=rpc-bind –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -121,32 +95,6 @@
   </entry>
   
   <entry>
-    <title>Redhat系安装ntp服务器</title>
-    <link href="//zunney.cn/2019/05/15/ntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/ntp服务搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-16T09:54:46.183Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装ntp时间同步完整流程</p></blockquote><a id="more"></a><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntp ntpdate</p></blockquote><h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><blockquote><p>vim /etc/ntp.conf</p></blockquote><pre><code>添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改防火墙"><a href="#修改防火墙" class="headerlink" title="修改防火墙"></a>修改防火墙</h2><blockquote><p>firewall-cmd –add-service=ntp –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>firewall-cmd –list-all</p></blockquote><h2 id="重启服务-1"><a href="#重启服务-1" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><blockquote><p>date -s 10:00:00</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源-1"><a href="#配置网络yum源-1" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntpdate</p></blockquote><h2 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h2><blockquote><p>ntpdate -u 192.168.242.131</p></blockquote><h2 id="查看时间"><a href="#查看时间" class="headerlink" title="查看时间"></a>查看时间</h2><blockquote><p>date</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装ntp时间同步完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Redhat系安装NextCloud私有云</title>
     <link href="//zunney.cn/2019/05/15/nextcloud%E6%90%AD%E5%BB%BA/"/>
     <id>//zunney.cn/2019/05/15/nextcloud搭建/</id>
@@ -173,6 +121,32 @@
   </entry>
   
   <entry>
+    <title>Redhat系安装ntp服务器</title>
+    <link href="//zunney.cn/2019/05/15/ntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/ntp服务搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:46.183Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装ntp时间同步完整流程</p></blockquote><a id="more"></a><h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntp ntpdate</p></blockquote><h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><blockquote><p>vim /etc/ntp.conf</p></blockquote><pre><code>添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改防火墙"><a href="#修改防火墙" class="headerlink" title="修改防火墙"></a>修改防火墙</h2><blockquote><p>firewall-cmd –add-service=ntp –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>firewall-cmd –list-all</p></blockquote><h2 id="重启服务-1"><a href="#重启服务-1" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote><p>systemctl restart ntpd</p></blockquote><h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><blockquote><p>date -s 10:00:00</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源-1"><a href="#配置网络yum源-1" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y ntpdate</p></blockquote><h2 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h2><blockquote><p>ntpdate -u 192.168.242.131</p></blockquote><h2 id="查看时间"><a href="#查看时间" class="headerlink" title="查看时间"></a>查看时间</h2><blockquote><p>date</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装ntp时间同步完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Redhat系的基础命令</title>
     <link href="//zunney.cn/2019/05/15/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
     <id>//zunney.cn/2019/05/15/基本命令/</id>
@@ -185,6 +159,32 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;Redhat系的各命令的使用&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redhat系安装nfs服务器</title>
+    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:40.131Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><pre><code>[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64</code></pre><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd –add-service=nfs –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=mountd –permanent</p></blockquote><blockquote><p>firewall-cmd –add-service=rpc-bind –permanent</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><pre><code>TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0</code></pre><blockquote><p>systemctl restart network</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>

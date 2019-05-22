@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hexo备份恢复命令]]></title>
+    <url>%2F2019%2F05%2F22%2Fhexo%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[用于hexo备份恢复命令 npm install hexo-cli -g npm install hexo --save npm install npm install hexo-deployer-git -save git init npm install hexo-generator-feed --save npm install hexo-generator-searchdb --save npm i --save hexo-wordcount ##博客自定义顺序 npm uninstall hexo-generator-index --save npm install hexo-generator-index-pin-top --save]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux内核引导]]></title>
     <url>%2F2019%2F05%2F18%2F%E5%86%85%E6%A0%B8%E5%BC%95%E5%AF%BC%2F</url>
     <content type="text"><![CDATA[Redhat系Linux内核引导过程及开机破密码 linux允许级别 0:关机 1：single user mode 单用户模式 2：没有nfs多用户 3：有nfs多用户 4：未开发保留 5：图形化界面 6：reboot重启 linux开机步骤 开机会重载/etc/fstab文件，将系统设置为可读可写 开机破密码 1、把rhgb quiet替换成init=/bin/bash，按Ctrl+c提交 2、mount：查看根分区是不是ro 3、mount -o remount,rw / ：重新挂载 4、echo redhat | passwd –stdin root：修改密码 5、touch /.autorelabel：清除selinux标签 6、esec /sbin/init]]></content>
@@ -40,18 +51,6 @@
     <title><![CDATA[Redhat系安装ntp服务器]]></title>
     <url>%2F2019%2F05%2F15%2Fntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[Redhat系安装ntp时间同步完整流程 服务端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 TYPE=Ethernet BOOTPROTO=static NAME=ens33 DEVICE=ens33 ONBOOT=yes IPADDR=192.168.242.131 NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo [163] name=163 enabled=1 gpgcheck=0 baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntp ntpdate 修改配置 vim /etc/ntp.conf 添加如下配置： restrict 192.168.242.0 mask 255.255.255.0 nomodify notrap server 127.127.1.0 fudge 127.127.1.0 stratum 10 重启服务 systemctl restart ntpd 修改防火墙 firewall-cmd –add-service=ntp –permanent firewall-cmd –reload firewall-cmd –list-all 重启服务 systemctl restart ntpd 修改时间 date -s 10:00:00 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 TYPE=Ethernet BOOTPROTO=static NAME=ens33 DEVICE=ens33 ONBOOT=yes IPADDR=192.168.242.132 NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo [163] name=163 enabled=1 gpgcheck=0 baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntpdate 同步时间 ntpdate -u 192.168.242.131 查看时间 date]]></content>
-      <categories>
-        <category>学习</category>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Redhat系安装nfs服务器]]></title>
-    <url>%2F2019%2F05%2F15%2Fnfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[Redhat系安装nfs时间同步完整流程 #服务端# 设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 TYPE=Ethernet BOOTPROTO=static NAME=ens33 DEVICE=ens33 ONBOOT=yes IPADDR=192.168.242.131 NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo [163] name=163 enabled=1 gpgcheck=0 baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y rpcbind nfs-utils nfs4-acl-tools 修改nfs配置文件 mkdir /redhat echo “/redhat 192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports exportfs -v 防火墙开端口 firewall-cmd –add-service=nfs –permanent firewall-cmd –add-service=mountd –permanent firewall-cmd –add-service=rpc-bind –permanent firewall-cmd –reload 开启服务 systemctl restart nfs systemctl restart rpcbind systemctl enable nfs systemctl enable rpcbind 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 TYPE=Ethernet BOOTPROTO=static NAME=ens33 DEVICE=ens33 ONBOOT=yes IPADDR=192.168.242.132 NETMASK=255.255.255.0 systemctl restart network 安装组件 yum install -y rpcbind nfs-utils nfs4-acl-tools 开启服务 systemctl restart nfs systemctl restart rpcbind systemctl enable nfs systemctl enable rpcbind 挂载nfs网络存储 mount -t nfs 192.168.242.131:/redhat /mnt/redhat/ df -h]]></content>
       <categories>
         <category>学习</category>
         <category>Linux</category>
@@ -112,6 +111,18 @@
     <title><![CDATA[Redhat系网卡链路聚合]]></title>
     <url>%2F2019%2F05%2F15%2F%E7%BD%91%E5%8D%A1%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88%2F</url>
     <content type="text"><![CDATA[Redhat系网卡的链路聚合完整流程 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo [163] name=163 enabled=1 gpgcheck=0 baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y gcc git vim net-tools 拷贝配置模板 cd /usr/share/doc/teamd-1.25/example_ifcfgs/3 cp * /etc/sysconfig/network-scripts/ -v 查看记住网卡名称 ifconfig 更改网卡配置文件名与查看到的相对应 mv ifcfg-eth1 ifcfg-ens37mv ifcfg-eth2 ifcfg-ens38 更改网卡配置文件 vim ifcfg-ens37 DEVICE=&quot;ens37&quot; DEVICETYPE=&quot;TeamPort&quot; ONBOOT=&quot;yes&quot; TEAM_MASTER=&quot;team_test0&quot; TEAM_PORT_CONFIG=&apos;{&quot;prio&quot;: -10, &quot;sticky&quot;: true}&apos; vim ifcfg-ens38 DEVICE=&quot;ens38&quot; DEVICETYPE=&quot;TeamPort&quot; ONBOOT=&quot;yes&quot; TEAM_MASTER=&quot;team_test0&quot; TEAM_PORT_CONFIG=&apos;{&quot;prio&quot;: -10, &quot;sticky&quot;: true}&apos; cat ifcfg-team_test0 DEVICE=&quot;team_test0&quot; DEVICETYPE=&quot;Team&quot; ONBOOT=&quot;yes&quot; BOOTPROTO=none NETMASK=255.255.255.0 IPADDR=192.168.9.66 TEAM_CONFIG=&apos;{&quot;runner&quot;: {&quot;name&quot;: &quot;activebackup&quot;}}&apos; 重启网络 systemctl restart network 查看聚合链路 teamdctl team_test0 state 查看网卡 nmcli connection show]]></content>
+      <categories>
+        <category>学习</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Redhat系安装nfs服务器]]></title>
+    <url>%2F2019%2F05%2F15%2Fnfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Redhat系安装nfs时间同步完整流程 #服务端# 设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 TYPE=Ethernet BOOTPROTO=static NAME=ens33 DEVICE=ens33 ONBOOT=yes IPADDR=192.168.242.131 NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo [163] name=163 enabled=1 gpgcheck=0 baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y rpcbind nfs-utils nfs4-acl-tools 修改nfs配置文件 mkdir /redhat echo “/redhat 192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports exportfs -v 防火墙开端口 firewall-cmd –add-service=nfs –permanent firewall-cmd –add-service=mountd –permanent firewall-cmd –add-service=rpc-bind –permanent firewall-cmd –reload 开启服务 systemctl restart nfs systemctl restart rpcbind systemctl enable nfs systemctl enable rpcbind 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 TYPE=Ethernet BOOTPROTO=static NAME=ens33 DEVICE=ens33 ONBOOT=yes IPADDR=192.168.242.132 NETMASK=255.255.255.0 systemctl restart network 安装组件 yum install -y rpcbind nfs-utils nfs4-acl-tools 开启服务 systemctl restart nfs systemctl restart rpcbind systemctl enable nfs systemctl enable rpcbind 挂载nfs网络存储 mount -t nfs 192.168.242.131:/redhat /mnt/redhat/ df -h]]></content>
       <categories>
         <category>学习</category>
         <category>Linux</category>

@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Zunney的博客">
 <meta property="og:description" content="Redhat系安装ntp时间同步完整流程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-16T09:54:46.183Z">
+<meta property="og:updated_time" content="2019-05-22T06:58:59.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redhat系安装ntp服务器">
 <meta name="twitter:description" content="Redhat系安装ntp时间同步完整流程">
@@ -456,7 +456,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 17:54:46" itemprop="dateModified" datetime="2019-05-16T17:54:46+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-22 14:58:59" itemprop="dateModified" datetime="2019-05-22T14:58:59+08:00">2019-05-22</time>
               
             
           </span>
@@ -521,14 +521,8 @@
 <h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
 <p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
 </blockquote>
-<pre><code>TYPE=Ethernet
-BOOTPROTO=static
-NAME=ens33
-DEVICE=ens33
-ONBOOT=yes
-IPADDR=192.168.242.131
-NETMASK=255.255.255.0
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.131</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>systemctl restart network</p>
 </blockquote>
 <h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote>
@@ -540,12 +534,8 @@ NETMASK=255.255.255.0
 <blockquote>
 <p>vim qzy.repo</p>
 </blockquote>
-<pre><code>[163]
-name=163
-enabled=1
-gpgcheck=0
-baseurl=http://mirrors.163.com/centos/7/os/x86_64
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>yum repolist</p>
 </blockquote>
 <h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
@@ -554,11 +544,8 @@ baseurl=http://mirrors.163.com/centos/7/os/x86_64
 <h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><blockquote>
 <p>vim /etc/ntp.conf</p>
 </blockquote>
-<pre><code>添加如下配置：
-restrict 192.168.242.0 mask 255.255.255.0 nomodify notrap
-server 127.127.1.0
-fudge 127.127.1.0 stratum 10
-</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">添加如下配置：</span><br><span class="line">restrict 192.168.242.0 mask 255.255.255.0 nomodify notrap</span><br><span class="line">server 127.127.1.0</span><br><span class="line">fudge 127.127.1.0 stratum 10</span><br></pre></td></tr></table></figure>
+<h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><blockquote>
 <p>systemctl restart ntpd</p>
 </blockquote>
 <h2 id="修改防火墙"><a href="#修改防火墙" class="headerlink" title="修改防火墙"></a>修改防火墙</h2><blockquote>
@@ -579,14 +566,8 @@ fudge 127.127.1.0 stratum 10
 <h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
 <p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
 </blockquote>
-<pre><code>TYPE=Ethernet
-BOOTPROTO=static
-NAME=ens33
-DEVICE=ens33
-ONBOOT=yes
-IPADDR=192.168.242.132
-NETMASK=255.255.255.0
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.132</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>systemctl restart network</p>
 </blockquote>
 <h2 id="配置网络yum源-1"><a href="#配置网络yum源-1" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote>
@@ -598,12 +579,8 @@ NETMASK=255.255.255.0
 <blockquote>
 <p>vim qzy.repo</p>
 </blockquote>
-<pre><code>[163]
-name=163
-enabled=1
-gpgcheck=0
-baseurl=http://mirrors.163.com/centos/7/os/x86_64
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>yum repolist</p>
 </blockquote>
 <h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
@@ -680,8 +657,8 @@ baseurl=http://mirrors.163.com/centos/7/os/x86_64
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/20/gnome常用插件/" rel="next" title="gnome常用插件">
-                <i class="fa fa-chevron-left"></i> gnome常用插件
+              <a href="/2019/05/15/kvm虚拟机搭建/" rel="next" title="Redhat系安装KVM虚拟机">
+                <i class="fa fa-chevron-left"></i> Redhat系安装KVM虚拟机
               </a>
             
           </div>
@@ -690,8 +667,8 @@ baseurl=http://mirrors.163.com/centos/7/os/x86_64
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/15/网卡链路聚合/" rel="prev" title="Redhat系网卡链路聚合">
-                Redhat系网卡链路聚合 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/15/nfs服务搭建/" rel="prev" title="Redhat系安装nfs服务器">
+                Redhat系安装nfs服务器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -975,7 +952,7 @@ baseurl=http://mirrors.163.com/centos/7/os/x86_64
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.1k字</span>
+  <span class="post-count">博客全站共6k字</span>
 </div>
         
 

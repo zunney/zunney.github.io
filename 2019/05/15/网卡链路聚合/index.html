@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Zunney的博客">
 <meta property="og:description" content="Redhat系网卡的链路聚合完整流程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-16T09:55:03.541Z">
+<meta property="og:updated_time" content="2019-05-22T07:05:59.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redhat系网卡链路聚合">
 <meta name="twitter:description" content="Redhat系网卡的链路聚合完整流程">
@@ -456,7 +456,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 17:55:03" itemprop="dateModified" datetime="2019-05-16T17:55:03+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-22 15:05:59" itemprop="dateModified" datetime="2019-05-22T15:05:59+08:00">2019-05-22</time>
               
             
           </span>
@@ -527,12 +527,8 @@
 <blockquote>
 <p>vim qzy.repo</p>
 </blockquote>
-<pre><code>[163]
-name=163
-enabled=1
-gpgcheck=0
-baseurl=http://mirrors.163.com/centos/7/os/x86_64
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>yum repolist</p>
 </blockquote>
 <h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
@@ -553,30 +549,16 @@ baseurl=http://mirrors.163.com/centos/7/os/x86_64
 <h2 id="更改网卡配置文件"><a href="#更改网卡配置文件" class="headerlink" title="更改网卡配置文件"></a>更改网卡配置文件</h2><blockquote>
 <p>vim ifcfg-ens37</p>
 </blockquote>
-<pre><code>DEVICE=&quot;ens37&quot;
-DEVICETYPE=&quot;TeamPort&quot;
-ONBOOT=&quot;yes&quot;
-TEAM_MASTER=&quot;team_test0&quot;
-TEAM_PORT_CONFIG=&apos;{&quot;prio&quot;: -10, &quot;sticky&quot;: true}&apos;
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=&quot;ens37&quot;</span><br><span class="line">DEVICETYPE=&quot;TeamPort&quot;</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">TEAM_MASTER=&quot;team_test0&quot;</span><br><span class="line">TEAM_PORT_CONFIG=&apos;&#123;&quot;prio&quot;: -10, &quot;sticky&quot;: true&#125;&apos;</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>vim ifcfg-ens38</p>
 </blockquote>
-<pre><code>DEVICE=&quot;ens38&quot;
-DEVICETYPE=&quot;TeamPort&quot;
-ONBOOT=&quot;yes&quot;
-TEAM_MASTER=&quot;team_test0&quot;
-TEAM_PORT_CONFIG=&apos;{&quot;prio&quot;: -10, &quot;sticky&quot;: true}&apos;
-</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=&quot;ens38&quot;</span><br><span class="line">DEVICETYPE=&quot;TeamPort&quot;</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">TEAM_MASTER=&quot;team_test0&quot;</span><br><span class="line">TEAM_PORT_CONFIG=&apos;&#123;&quot;prio&quot;: -10, &quot;sticky&quot;: true&#125;&apos;</span><br></pre></td></tr></table></figure>
+<blockquote>
 <p>cat ifcfg-team_test0 </p>
 </blockquote>
-<pre><code>DEVICE=&quot;team_test0&quot;
-DEVICETYPE=&quot;Team&quot;
-ONBOOT=&quot;yes&quot;
-BOOTPROTO=none
-NETMASK=255.255.255.0
-IPADDR=192.168.9.66
-TEAM_CONFIG=&apos;{&quot;runner&quot;: {&quot;name&quot;: &quot;activebackup&quot;}}&apos;
-</code></pre><h2 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h2><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=&quot;team_test0&quot;</span><br><span class="line">DEVICETYPE=&quot;Team&quot;</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">IPADDR=192.168.9.66</span><br><span class="line">TEAM_CONFIG=&apos;&#123;&quot;runner&quot;: &#123;&quot;name&quot;: &quot;activebackup&quot;&#125;&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h2><blockquote>
 <p>systemctl restart network</p>
 </blockquote>
 <h2 id="查看聚合链路"><a href="#查看聚合链路" class="headerlink" title="查看聚合链路"></a>查看聚合链路</h2><blockquote>
@@ -650,8 +632,8 @@ TEAM_CONFIG=&apos;{&quot;runner&quot;: {&quot;name&quot;: &quot;activebackup&quo
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/15/ntp服务搭建/" rel="next" title="Redhat系安装ntp服务器">
-                <i class="fa fa-chevron-left"></i> Redhat系安装ntp服务器
+              <a href="/2019/05/15/nextcloud搭建/" rel="next" title="Redhat系安装NextCloud私有云">
+                <i class="fa fa-chevron-left"></i> Redhat系安装NextCloud私有云
               </a>
             
           </div>
@@ -660,8 +642,8 @@ TEAM_CONFIG=&apos;{&quot;runner&quot;: {&quot;name&quot;: &quot;activebackup&quo
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/15/数据库的安装/" rel="prev" title="Redhat系安装数据库">
-                Redhat系安装数据库 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/15/基本命令/" rel="prev" title="Redhat系的基础命令">
+                Redhat系的基础命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -945,7 +927,7 @@ TEAM_CONFIG=&apos;{&quot;runner&quot;: {&quot;name&quot;: &quot;activebackup&quo
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.1k字</span>
+  <span class="post-count">博客全站共6k字</span>
 </div>
         
 

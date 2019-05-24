@@ -96,9 +96,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Redhat系安装KVM虚拟机]]></title>
-    <url>%2F2019%2F05%2F15%2Fkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[Redhat系安装KVM虚拟机完整流程 设置网络、网桥 cd /etc/sysconfig/network-scripts/ vim ifcfg-eno16777736 123456TYPE=EthernetBOOTPROTO=staticNAME=eno16777736DEVICE=eno16777736ONBOOT=yesBRIDGE=br0 cp ifcfg-eno16777736 ifcfg-br0 1234567TYPE=BridgeBOOTPROTO=staticDEVICE=br0NAME=br0ONBOOT=yesIPADDR=192.168.10.1NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 mkdir /mnt/hgfs cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[base]name=localenabled=1gpgcheck=0baseurl=file:///mnt/hgfs yum repolist 安装组件 yum install -y qemu-kvm libvirt* virt-manager 启动服务 systemctl restart libvirtd virt-manager]]></content>
+    <title><![CDATA[Redhat系安装ntp服务器]]></title>
+    <url>%2F2019%2F05%2F15%2Fntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Redhat系安装ntp时间同步完整流程 服务端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntp ntpdate 修改配置 vim /etc/ntp.conf 1234添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10 重启服务 systemctl restart ntpd 修改防火墙 firewall-cmd –add-service=ntp –permanent firewall-cmd –reload firewall-cmd –list-all 重启服务 systemctl restart ntpd 修改时间 date -s 10:00:00 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntpdate 同步时间 ntpdate -u 192.168.242.131 查看时间 date]]></content>
       <categories>
         <category>学习</category>
         <category>Linux</category>
@@ -132,9 +132,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Redhat系安装ntp服务器]]></title>
-    <url>%2F2019%2F05%2F15%2Fntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[Redhat系安装ntp时间同步完整流程 服务端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntp ntpdate 修改配置 vim /etc/ntp.conf 1234添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10 重启服务 systemctl restart ntpd 修改防火墙 firewall-cmd –add-service=ntp –permanent firewall-cmd –reload firewall-cmd –list-all 重启服务 systemctl restart ntpd 修改时间 date -s 10:00:00 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntpdate 同步时间 ntpdate -u 192.168.242.131 查看时间 date]]></content>
+    <title><![CDATA[Redhat系安装KVM虚拟机]]></title>
+    <url>%2F2019%2F05%2F15%2Fkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Redhat系安装KVM虚拟机完整流程 设置网络、网桥 cd /etc/sysconfig/network-scripts/ vim ifcfg-eno16777736 123456TYPE=EthernetBOOTPROTO=staticNAME=eno16777736DEVICE=eno16777736ONBOOT=yesBRIDGE=br0 cp ifcfg-eno16777736 ifcfg-br0 1234567TYPE=BridgeBOOTPROTO=staticDEVICE=br0NAME=br0ONBOOT=yesIPADDR=192.168.10.1NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 mkdir /mnt/hgfs cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[base]name=localenabled=1gpgcheck=0baseurl=file:///mnt/hgfs yum repolist 安装组件 yum install -y qemu-kvm libvirt* virt-manager 启动服务 systemctl restart libvirtd virt-manager]]></content>
       <categories>
         <category>学习</category>
         <category>Linux</category>

@@ -135,18 +135,18 @@
 
 
 
-  <meta name="description" content="Redhat系的各命令的使用">
+  <meta name="description" content="Linux的各命令的使用">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redhat系的基础命令">
-<meta property="og:url" content="//zunney.cn/2019/05/15/基本命令/index.html">
+<meta property="og:title" content="Linux的基础命令">
+<meta property="og:url" content="//zunney.cn/2019/05/15/Linux基本命令/index.html">
 <meta property="og:site_name" content="Zunney的博客">
-<meta property="og:description" content="Redhat系的各命令的使用">
+<meta property="og:description" content="Linux的各命令的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-22T07:04:54.715Z">
+<meta property="og:updated_time" content="2019-05-24T07:14:56.962Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redhat系的基础命令">
-<meta name="twitter:description" content="Redhat系的各命令的使用">
+<meta name="twitter:title" content="Linux的基础命令">
+<meta name="twitter:description" content="Linux的各命令的使用">
 
 
 
@@ -155,7 +155,7 @@
 
 
 
-  <link rel="canonical" href="//zunney.cn/2019/05/15/基本命令/">
+  <link rel="canonical" href="//zunney.cn/2019/05/15/Linux基本命令/">
 
 
 
@@ -165,7 +165,7 @@
   };
 </script>
 
-  <title>Redhat系的基础命令 | Zunney的博客</title>
+  <title>Linux的基础命令 | Zunney的博客</title>
   
 
 
@@ -397,7 +397,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/基本命令/">
+    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/Linux基本命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zunney">
@@ -414,7 +414,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redhat系的基础命令
+          <h1 class="post-title" itemprop="name headline">Linux的基础命令
               
             
           </h1>
@@ -456,7 +456,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-22 15:04:54" itemprop="dateModified" datetime="2019-05-22T15:04:54+08:00">2019-05-22</time>
+                <time title="修改时间：2019-05-24 15:14:56" itemprop="dateModified" datetime="2019-05-24T15:14:56+08:00">2019-05-24</time>
               
             
           </span>
@@ -515,51 +515,38 @@
 
       
         <blockquote>
-<p>Redhat系的各命令的使用</p>
+<p>Linux的各命令的使用</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><blockquote>
-<p>passwd直接回车：修改当前用户的密码</p>
-</blockquote>
-<blockquote>
+<h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><p>-l    显示详细信息</p>
+<p>-A    显示隐藏文件</p>
+<h2 id="alias别名"><a href="#alias别名" class="headerlink" title="alias别名"></a>alias别名</h2><h2 id="touch创建文件"><a href="#touch创建文件" class="headerlink" title="touch创建文件"></a>touch创建文件</h2><h2 id="mkdir创建文件夹"><a href="#mkdir创建文件夹" class="headerlink" title="mkdir创建文件夹"></a>mkdir创建文件夹</h2><p>mkdir {aa,bb,cc}    创建平级目录</p>
+<p>mkdir aa/bb/cc -p    创建子集目录    </p>
+<h2 id="pwd显示当前路径"><a href="#pwd显示当前路径" class="headerlink" title="pwd显示当前路径"></a>pwd显示当前路径</h2><h2 id="绝对路径与相对路径"><a href="#绝对路径与相对路径" class="headerlink" title="绝对路径与相对路径"></a>绝对路径与相对路径</h2><p>绝对路径从根目录出发</p>
+<p>相对路径从当前目录出发</p>
+<p>.    当前目录</p>
+<p>..    上一级目录</p>
+<h2 id="cp-复制拷贝"><a href="#cp-复制拷贝" class="headerlink" title="cp 复制拷贝"></a>cp 复制拷贝</h2><p>-i    交互式</p>
+<p>-f    强制</p>
+<p>\    转译符，让命令不接选项</p>
+<p>-p    带权限拷贝</p>
+<h2 id="rm删除"><a href="#rm删除" class="headerlink" title="rm删除"></a>rm删除</h2><p>-v    显示删除过程</p>
+<p>-r    递归删除</p>
+<p>-f    强制删除</p>
+<h2 id="passwd命令"><a href="#passwd命令" class="headerlink" title="passwd命令"></a>passwd命令</h2><p>passwd直接回车：修改当前用户的密码</p>
 <p>echo  redhat | passwd –stdin root</p>
-</blockquote>
-<blockquote>
 <p>echo root:passwd | chpasswd</p>
-</blockquote>
-<h2 id="管道"><a href="#管道" class="headerlink" title="| 管道"></a>| 管道</h2><blockquote>
-<p>|:管道，两进程之间的链接机制</p>
-</blockquote>
-<blockquote>
+<h2 id="管道"><a href="#管道" class="headerlink" title="| 管道"></a>| 管道</h2><p>|:管道，两进程之间的链接机制</p>
 <p>–stdin:基于键盘的标准输入</p>
-</blockquote>
-<blockquote>
 <p>管道两边进程同时进行</p>
-</blockquote>
-<h2 id="linux目录结构"><a href="#linux目录结构" class="headerlink" title="linux目录结构"></a>linux目录结构</h2><blockquote>
-<p>linux是单树形目录结构</p>
-</blockquote>
-<blockquote>
+<h2 id="linux目录结构"><a href="#linux目录结构" class="headerlink" title="linux目录结构"></a>linux目录结构</h2><p>linux是单树形目录结构</p>
 <p>/:根目录</p>
-</blockquote>
-<blockquote>
 <p>/bin:普通用户可执行程序</p>
-</blockquote>
-<blockquote>
 <p>/sbin:系统用户的可执行程序</p>
-</blockquote>
-<blockquote>
 <p>/home:普通用户的用户家目录</p>
-</blockquote>
-<blockquote>
 <p>/media:光盘挂载点</p>
-</blockquote>
-<blockquote>
 <p>/mnt:自定义挂载点</p>
-</blockquote>
-<blockquote>
 <p>/tmp:临时文件，自带计划任务，隔一段时间会自动删除</p>
-</blockquote>
 <h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><blockquote>
 <p>普通模式</p>
 </blockquote>
@@ -576,83 +563,33 @@
 <p>命令行模式</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">w：保存</span><br><span class="line">q：退出</span><br><span class="line">q!：强制退出</span><br><span class="line">wq：保存退出</span><br><span class="line">!：强制</span><br><span class="line">wq!：强制保存退出</span><br><span class="line">set number:显示行号</span><br><span class="line">set no number:不显示行号</span><br><span class="line">14：定位到文本14行</span><br></pre></td></tr></table></figure>
-<h2 id="date日期时间"><a href="#date日期时间" class="headerlink" title="date日期时间"></a>date日期时间</h2><blockquote>
-<p>date:显示时间</p>
-</blockquote>
-<blockquote>
+<h2 id="date日期时间"><a href="#date日期时间" class="headerlink" title="date日期时间"></a>date日期时间</h2><p>date:显示时间</p>
 <p>date -s 2019-5-11：修改日期</p>
-</blockquote>
-<blockquote>
 <p>date -s 10:00:00：修改时间</p>
-</blockquote>
-<blockquote>
 <p>date -s “2019-5-11 10:00:00” ：修改日期时间</p>
-</blockquote>
-<h2 id="cal日历"><a href="#cal日历" class="headerlink" title="cal日历"></a>cal日历</h2><blockquote>
-<p>cal：显示日历</p>
-</blockquote>
-<blockquote>
+<h2 id="cal日历"><a href="#cal日历" class="headerlink" title="cal日历"></a>cal日历</h2><p>cal：显示日历</p>
 <p>cal 05 2018：显示2018年5月日历</p>
-</blockquote>
-<blockquote>
 <p>cal 2018：显示2018年日历</p>
-</blockquote>
-<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><blockquote>
-<p>-r：递归</p>
-</blockquote>
-<blockquote>
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>-r：递归</p>
 <p>cp文件的selinux属性随着目的的属性而变化</p>
-</blockquote>
-<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><blockquote>
-<p>mv文件的selinux属性跟着原属性走</p>
-</blockquote>
-<h2 id="pwd当前目录"><a href="#pwd当前目录" class="headerlink" title="pwd当前目录"></a>pwd当前目录</h2><blockquote>
-<p>pwd:查看当前工作目录</p>
-</blockquote>
-<h2 id="rm删除"><a href="#rm删除" class="headerlink" title="rm删除"></a>rm删除</h2><blockquote>
-<p>-f：强制<br>-r：递归<br>-v：显示执行过程</p>
-</blockquote>
-<h2 id="gt-重定向"><a href="#gt-重定向" class="headerlink" title="&gt;重定向"></a>&gt;重定向</h2><blockquote>
-<p>–stdin：标准输入</p>
-</blockquote>
-<blockquote>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>mv文件的selinux属性跟着原属性走</p>
+<h2 id="pwd当前目录"><a href="#pwd当前目录" class="headerlink" title="pwd当前目录"></a>pwd当前目录</h2><p>pwd:查看当前工作目录</p>
+<h2 id="rm删除-1"><a href="#rm删除-1" class="headerlink" title="rm删除"></a>rm删除</h2><p>-f：强制<br>-r：递归<br>-v：显示执行过程</p>
+<h2 id="gt-重定向"><a href="#gt-重定向" class="headerlink" title="&gt;重定向"></a>&gt;重定向</h2><p>–stdin：标准输入</p>
 <p>–stdout：标准输出</p>
-</blockquote>
-<blockquote>
 <p>–stderr：标准错误</p>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; ：标准输出重定向（会覆盖文件所以内容，会损坏源文件）</span><br><span class="line">&gt;&gt;：标准输出的追加（最文本最末段添加，不会损坏源文件）</span><br><span class="line">&amp;&gt;：任何重定向</span><br><span class="line">2&gt;：标准错误的重定向</span><br><span class="line">2&gt;&gt;：标准错误的追加</span><br><span class="line">&amp;&gt;&gt;：任何追加</span><br></pre></td></tr></table></figure>
-<h2 id="文件和文件夹的权限"><a href="#文件和文件夹的权限" class="headerlink" title="文件和文件夹的权限"></a>文件和文件夹的权限</h2><blockquote>
-<p>文件：合理权限至少是3以上的偶数（644）</p>
-</blockquote>
-<blockquote>
+<h2 id="文件和文件夹的权限"><a href="#文件和文件夹的权限" class="headerlink" title="文件和文件夹的权限"></a>文件和文件夹的权限</h2><p>文件：合理权限至少是3以上的偶数（644）</p>
 <p>文件夹：合理权限至少是3以上的偶数（755）</p>
-</blockquote>
-<h2 id="find查找"><a href="#find查找" class="headerlink" title="find查找"></a>find查找</h2><blockquote>
-<p>find + 路径 + 选项</p>
-</blockquote>
+<h2 id="find查找"><a href="#find查找" class="headerlink" title="find查找"></a>find查找</h2><p>find + 路径 + 选项</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-name：按名称</span><br><span class="line">-group：按组查询</span><br><span class="line">-user：按用户查询</span><br><span class="line">-mtime +1：一天前</span><br><span class="line">-mtime +1：一天后</span><br></pre></td></tr></table></figure>
-<h2 id="文本处理工具"><a href="#文本处理工具" class="headerlink" title="文本处理工具"></a>文本处理工具</h2><blockquote>
-<p>cat：查看文本中全部内容</p>
-</blockquote>
-<blockquote>
+<h2 id="文本处理工具"><a href="#文本处理工具" class="headerlink" title="文本处理工具"></a>文本处理工具</h2><p>cat：查看文本中全部内容</p>
 <p>more：查看文本中全部内容，第一行开始，一屏显示完后左下角有百分比，回车翻一行，空格翻一页</p>
-</blockquote>
-<blockquote>
 <p>less：跟more对应，查看文本中全部内容，第一行开始，回车翻一行，空格翻一页，不会自动退出，退出按q</p>
-</blockquote>
-<blockquote>
 <p>grep：文本过滤</p>
-</blockquote>
-<blockquote>
 <p>head：默认显示开头十行，-n指定行数</p>
-</blockquote>
-<blockquote>
 <p>tail：跟head对应，默认显示最后十行，-n指定行数</p>
-</blockquote>
-<blockquote>
 <p>wc：统计</p>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 19   27  846   passwd</span><br><span class="line">行数 单词 字节数 文件名</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>sort：默认字母顺序显示全部 </p>
@@ -778,8 +715,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/15/数据库的安装/" rel="next" title="Redhat系安装数据库">
-                <i class="fa fa-chevron-left"></i> Redhat系安装数据库
+              <a href="/2019/05/15/kvm虚拟机搭建/" rel="next" title="Redhat系安装KVM虚拟机">
+                <i class="fa fa-chevron-left"></i> Redhat系安装KVM虚拟机
               </a>
             
           </div>
@@ -788,8 +725,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/15/nextcloud搭建/" rel="prev" title="Redhat系安装NextCloud私有云">
-                Redhat系安装NextCloud私有云 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/15/nfs服务搭建/" rel="prev" title="Redhat系安装nfs服务器">
+                Redhat系安装nfs服务器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1033,7 +970,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">1.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">2.</span> <span class="nav-text">| 管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux目录结构"><span class="nav-number">3.</span> <span class="nav-text">linux目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim"><span class="nav-number">4.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date日期时间"><span class="nav-number">5.</span> <span class="nav-text">date日期时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cal日历"><span class="nav-number">6.</span> <span class="nav-text">cal日历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp"><span class="nav-number">7.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mv"><span class="nav-number">8.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwd当前目录"><span class="nav-number">9.</span> <span class="nav-text">pwd当前目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm删除"><span class="nav-number">10.</span> <span class="nav-text">rm删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-重定向"><span class="nav-number">11.</span> <span class="nav-text">&gt;重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和文件夹的权限"><span class="nav-number">12.</span> <span class="nav-text">文件和文件夹的权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find查找"><span class="nav-number">13.</span> <span class="nav-text">find查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理工具"><span class="nav-number">14.</span> <span class="nav-text">文本处理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#process进程"><span class="nav-number">15.</span> <span class="nav-text">process进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计划任务"><span class="nav-number">16.</span> <span class="nav-text">计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘类型"><span class="nav-number">17.</span> <span class="nav-text">磁盘类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘分区"><span class="nav-number">18.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载"><span class="nav-number">19.</span> <span class="nav-text">挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑卷"><span class="nav-number">20.</span> <span class="nav-text">逻辑卷</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ls命令"><span class="nav-number">1.</span> <span class="nav-text">ls命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alias别名"><span class="nav-number">2.</span> <span class="nav-text">alias别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#touch创建文件"><span class="nav-number">3.</span> <span class="nav-text">touch创建文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkdir创建文件夹"><span class="nav-number">4.</span> <span class="nav-text">mkdir创建文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwd显示当前路径"><span class="nav-number">5.</span> <span class="nav-text">pwd显示当前路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绝对路径与相对路径"><span class="nav-number">6.</span> <span class="nav-text">绝对路径与相对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp-复制拷贝"><span class="nav-number">7.</span> <span class="nav-text">cp 复制拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm删除"><span class="nav-number">8.</span> <span class="nav-text">rm删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#passwd命令"><span class="nav-number">9.</span> <span class="nav-text">passwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">10.</span> <span class="nav-text">| 管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux目录结构"><span class="nav-number">11.</span> <span class="nav-text">linux目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim"><span class="nav-number">12.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date日期时间"><span class="nav-number">13.</span> <span class="nav-text">date日期时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cal日历"><span class="nav-number">14.</span> <span class="nav-text">cal日历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp"><span class="nav-number">15.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mv"><span class="nav-number">16.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwd当前目录"><span class="nav-number">17.</span> <span class="nav-text">pwd当前目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm删除-1"><span class="nav-number">18.</span> <span class="nav-text">rm删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-重定向"><span class="nav-number">19.</span> <span class="nav-text">&gt;重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和文件夹的权限"><span class="nav-number">20.</span> <span class="nav-text">文件和文件夹的权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find查找"><span class="nav-number">21.</span> <span class="nav-text">find查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理工具"><span class="nav-number">22.</span> <span class="nav-text">文本处理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#process进程"><span class="nav-number">23.</span> <span class="nav-text">process进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计划任务"><span class="nav-number">24.</span> <span class="nav-text">计划任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘类型"><span class="nav-number">25.</span> <span class="nav-text">磁盘类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘分区"><span class="nav-number">26.</span> <span class="nav-text">磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载"><span class="nav-number">27.</span> <span class="nav-text">挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑卷"><span class="nav-number">28.</span> <span class="nav-text">逻辑卷</span></a></li></ol></div>
             
 
           </div>
@@ -1077,7 +1014,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.3k字</span>
+  <span class="post-count">博客全站共6.4k字</span>
 </div>
         
 
@@ -1206,7 +1143,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2019/05/15/基本命令/'
+        refer: '2019/05/15/Linux基本命令/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];

@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Zunney的博客">
 <meta property="og:description" content="Linux的各命令的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-24T08:52:10.877Z">
+<meta property="og:updated_time" content="2019-05-24T09:01:59.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux的基础命令">
 <meta name="twitter:description" content="Linux的各命令的使用">
@@ -439,7 +439,7 @@
                 
               
 
-              <time title="创建时间：2019-05-24 13:22:44 / 修改时间：16:52:10" itemprop="dateCreated datePublished" datetime="2019-05-24T13:22:44+08:00">2019-05-24</time>
+              <time title="创建时间：2019-05-24 13:22:44 / 修改时间：17:01:59" itemprop="dateCreated datePublished" datetime="2019-05-24T13:22:44+08:00">2019-05-24</time>
             
 
             
@@ -570,12 +570,13 @@
 <h2 id="rm删除-1"><a href="#rm删除-1" class="headerlink" title="rm删除"></a>rm删除</h2><p>-f：强制<br>-r：递归<br>-v：显示执行过程</p>
 <h2 id="gt-重定向"><a href="#gt-重定向" class="headerlink" title="&gt;重定向"></a>&gt;重定向</h2><p>–stdin：标准输入</p>
 <p>–stdout：标准输出</p>
-<p>–stderr：标准错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; ：标准输出重定向（会覆盖文件所以内容，会损坏源文件）</span><br><span class="line">&gt;&gt;：标准输出的追加（最文本最末段添加，不会损坏源文件）</span><br><span class="line">&amp;&gt;：任何重定向</span><br><span class="line">2&gt;：标准错误的重定向</span><br><span class="line">2&gt;&gt;：标准错误的追加</span><br><span class="line">&amp;&gt;&gt;：任何追加</span><br></pre></td></tr></table></figure>
-<h2 id="find查找"><a href="#find查找" class="headerlink" title="find查找"></a>find查找</h2><blockquote>
-<p>find + 路径 + 选项</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-name：按名称</span><br><span class="line">-group：按组查询</span><br><span class="line">-user：按用户查询</span><br><span class="line">-mtime +1：一天前</span><br><span class="line">-mtime +1：一天后</span><br></pre></td></tr></table></figure>
+<p>–stderr：标准错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; ：标准输出重定向（会覆盖文件所以内容，会损坏源文件）</span><br><span class="line"></span><br><span class="line">&gt;&gt;：标准输出的追加（最文本最末段添加，不会损坏源文件）</span><br><span class="line"></span><br><span class="line">&amp;&gt;：任何重定向</span><br><span class="line"></span><br><span class="line">2&gt;：标准错误的重定向</span><br><span class="line"></span><br><span class="line">2&gt;&gt;：标准错误的追加</span><br><span class="line"></span><br><span class="line">&amp;&gt;&gt;：任何追加</span><br></pre></td></tr></table></figure></p>
+<h2 id="find查找"><a href="#find查找" class="headerlink" title="find查找"></a>find查找</h2><p>find + 路径 + 选项</p>
+<p>-name：按名称</p>
+<p>-group：按组查询</p>
+<p>-user：按用户查询</p>
+<p>-mtime +1：一天前</p>
+<p>-mtime +1：一天后</p>
 <h2 id="文本处理工具"><a href="#文本处理工具" class="headerlink" title="文本处理工具"></a>文本处理工具</h2><p>cat：查看文本中全部内容</p>
 <p>more：查看文本中全部内容，第一行开始，一屏显示完后左下角有百分比，回车翻一行，空格翻一页</p>
 <p>less：跟more对应，查看文本中全部内容，第一行开始，回车翻一行，空格翻一页，不会自动退出，退出按q</p>

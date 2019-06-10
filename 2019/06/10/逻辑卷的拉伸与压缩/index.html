@@ -135,18 +135,18 @@
 
 
 
-  <meta name="description" content="用于hexo备份恢复命令">
-<meta name="keywords" content="hexo">
+  <meta name="description" content="逻辑卷的拉伸压缩与快照">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo备份恢复命令">
-<meta property="og:url" content="//zunney.cn/2019/05/22/hexo备份恢复命令/index.html">
+<meta property="og:title" content="逻辑卷的拉伸压缩与快照">
+<meta property="og:url" content="//zunney.cn/2019/06/10/逻辑卷的拉伸与压缩/index.html">
 <meta property="og:site_name" content="Zunney的博客">
-<meta property="og:description" content="用于hexo备份恢复命令">
+<meta property="og:description" content="逻辑卷的拉伸压缩与快照">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-24T06:58:34.575Z">
+<meta property="og:updated_time" content="2019-06-10T14:35:47.933Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo备份恢复命令">
-<meta name="twitter:description" content="用于hexo备份恢复命令">
+<meta name="twitter:title" content="逻辑卷的拉伸压缩与快照">
+<meta name="twitter:description" content="逻辑卷的拉伸压缩与快照">
 
 
 
@@ -155,7 +155,7 @@
 
 
 
-  <link rel="canonical" href="//zunney.cn/2019/05/22/hexo备份恢复命令/">
+  <link rel="canonical" href="//zunney.cn/2019/06/10/逻辑卷的拉伸与压缩/">
 
 
 
@@ -165,7 +165,7 @@
   };
 </script>
 
-  <title>hexo备份恢复命令 | Zunney的博客</title>
+  <title>逻辑卷的拉伸压缩与快照 | Zunney的博客</title>
   
 
 
@@ -397,7 +397,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/22/hexo备份恢复命令/">
+    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/06/10/逻辑卷的拉伸与压缩/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zunney">
@@ -414,7 +414,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo备份恢复命令
+          <h1 class="post-title" itemprop="name headline">逻辑卷的拉伸压缩与快照
               
             
           </h1>
@@ -439,24 +439,12 @@
                 
               
 
-              <time title="创建时间：2019-05-22 14:37:13" itemprop="dateCreated datePublished" datetime="2019-05-22T14:37:13+08:00">2019-05-22</time>
+              <time title="创建时间：2019-06-10 21:51:13 / 修改时间：22:35:47" itemprop="dateCreated datePublished" datetime="2019-06-10T21:51:13+08:00">2019-06-10</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-24 14:58:34" itemprop="dateModified" datetime="2019-05-24T14:58:34+08:00">2019-05-24</time>
               
             
           </span>
@@ -473,7 +461,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
@@ -508,11 +503,74 @@
 
       
         <blockquote>
-<p>用于hexo备份恢复命令</p>
+<p>逻辑卷的拉伸压缩与快照</p>
 </blockquote>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">npm install hexo --save</span><br><span class="line"></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">npm install hexo-deployer-git -save</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br><span class="line"></span><br><span class="line">npm i --save hexo-wordcount</span><br></pre></td></tr></table></figure>
-<h2 id="博客自定义顺序"><a href="#博客自定义顺序" class="headerlink" title="博客自定义顺序"></a>博客自定义顺序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line"></span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
+<h2 id="创建逻辑卷"><a href="#创建逻辑卷" class="headerlink" title="创建逻辑卷"></a>创建逻辑卷</h2><blockquote>
+<p>创建物理卷</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb[1-3]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>创建逻辑卷组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgcreate linux /dev/sdb[1-3]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>创建逻辑卷</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -L 2G  linux -n redhat</span><br></pre></td></tr></table></figure>
+<h2 id="拉伸逻辑卷"><a href="#拉伸逻辑卷" class="headerlink" title="拉伸逻辑卷"></a>拉伸逻辑卷</h2><blockquote>
+<p>扩大逻辑卷</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvresize -L 5G /dev/linux/qzy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>扩大文件系统</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resize2fs /dev/linux/qzy</span><br></pre></td></tr></table></figure>
+<h2 id="拉伸卷组"><a href="#拉伸卷组" class="headerlink" title="拉伸卷组"></a>拉伸卷组</h2><blockquote>
+<p>创建物理卷</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb5</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加进卷组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgextend linux /dev/sdb5</span><br></pre></td></tr></table></figure>
+<h2 id="压缩逻辑卷"><a href="#压缩逻辑卷" class="headerlink" title="压缩逻辑卷"></a>压缩逻辑卷</h2><blockquote>
+<p>检测剩余空间</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e2fsck -f /dev/linux/qzy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>缩减文件系统</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resize2fs /dev/linux/qzy 1G</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>缩减逻辑卷</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvreduce -L 1G /dev/linux/qzy</span><br></pre></td></tr></table></figure>
+<h2 id="缩减卷组"><a href="#缩减卷组" class="headerlink" title="缩减卷组"></a>缩减卷组</h2><blockquote>
+<p>移动物理卷数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pvmove /dev/sdb5</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>移出卷组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgreduce linux /dev/sdb5</span><br></pre></td></tr></table></figure>
+<h2 id="快照管理"><a href="#快照管理" class="headerlink" title="快照管理"></a>快照管理</h2><blockquote>
+<p>创建只读快照</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -L 1G -p r -n qzy_backup -s /dev/linux/qzy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>挂载快照</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/linux/qzy_backup /mnt/qzy_backup/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>卸载逻辑卷</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /dev/linux/qzy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>恢复快照（会自动删除快照）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvconvert --merge /dev/linux/qzy_backup</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -564,7 +622,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
           
         </div>
       
@@ -577,8 +635,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/18/内核引导/" rel="next" title="Linux内核引导">
-                <i class="fa fa-chevron-left"></i> Linux内核引导
+              <a href="/2019/05/27/常见网络服务扫描/" rel="next" title="常见网络服务扫描">
+                <i class="fa fa-chevron-left"></i> 常见网络服务扫描
               </a>
             
           </div>
@@ -586,10 +644,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/24/nmap的使用/" rel="prev" title="nmap的使用">
-                nmap的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -832,7 +886,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#博客自定义顺序"><span class="nav-number">1.</span> <span class="nav-text">博客自定义顺序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建逻辑卷"><span class="nav-number">1.</span> <span class="nav-text">创建逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉伸逻辑卷"><span class="nav-number">2.</span> <span class="nav-text">拉伸逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉伸卷组"><span class="nav-number">3.</span> <span class="nav-text">拉伸卷组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩逻辑卷"><span class="nav-number">4.</span> <span class="nav-text">压缩逻辑卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缩减卷组"><span class="nav-number">5.</span> <span class="nav-text">缩减卷组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快照管理"><span class="nav-number">6.</span> <span class="nav-text">快照管理</span></a></li></ol></div>
             
 
           </div>
@@ -1005,7 +1059,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2019/05/22/hexo备份恢复命令/'
+        refer: '2019/06/10/逻辑卷的拉伸与压缩/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];

@@ -135,13 +135,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Zunney的博客">
-<meta property="og:url" content="//zunney.cn/page/2/index.html">
+  <meta name="description" content="Redhat系安装iscsi服务器完整流程">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redhat系安装iscsi服务器">
+<meta property="og:url" content="//zunney.cn/2019/06/20/iscsi搭建/index.html">
 <meta property="og:site_name" content="Zunney的博客">
+<meta property="og:description" content="Redhat系安装iscsi服务器完整流程">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-20T09:37:41.843Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zunney的博客">
+<meta name="twitter:title" content="Redhat系安装iscsi服务器">
+<meta name="twitter:description" content="Redhat系安装iscsi服务器完整流程">
 
 
 
@@ -150,7 +155,7 @@
 
 
 
-  <link rel="canonical" href="//zunney.cn/page/2/">
+  <link rel="canonical" href="//zunney.cn/2019/06/20/iscsi搭建/">
 
 
 
@@ -160,7 +165,7 @@
   };
 </script>
 
-  <title>Zunney的博客</title>
+  <title>Redhat系安装iscsi服务器 | Zunney的博客</title>
   
 
 
@@ -209,8 +214,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -376,9 +380,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -393,7 +397,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/nfs服务搭建/">
+    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/06/20/iscsi搭建/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zunney">
@@ -410,10 +414,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/15/nfs服务搭建/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">Redhat系安装nfs服务器</a>
+          <h1 class="post-title" itemprop="name headline">Redhat系安装iscsi服务器
               
             
           </h1>
@@ -438,24 +439,12 @@
                 
               
 
-              <time title="创建时间：2019-05-15 18:27:13" itemprop="dateCreated datePublished" datetime="2019-05-15T18:27:13+08:00">2019-05-15</time>
+              <time title="创建时间：2019-06-20 15:03:13 / 修改时间：17:37:41" itemprop="dateCreated datePublished" datetime="2019-06-20T15:03:13+08:00">2019-06-20</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-20 17:38:39" itemprop="dateModified" datetime="2019-06-20T17:38:39+08:00">2019-06-20</time>
               
             
           </span>
@@ -513,20 +502,75 @@
       
 
       
-        
-          <blockquote>
-<p>Redhat系安装nfs时间同步完整流程</p>
+        <blockquote>
+<p>Redhat系安装iscsi服务器完整流程</p>
 </blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/15/nfs服务搭建/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
+<a id="more"></a>
+<h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
+<p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.17.130</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote>
+<p>cd /etc/yum.repos.d/ </p>
+</blockquote>
+<blockquote>
+<p>touch qzy.repo</p>
+</blockquote>
+<blockquote>
+<p>vim qzy.repo</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>yum repolist</p>
+</blockquote>
+<h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
+<p>yum install -y targetcli</p>
+</blockquote>
+<h2 id="进入配置targetcli"><a href="#进入配置targetcli" class="headerlink" title="进入配置targetcli"></a>进入配置targetcli</h2><blockquote>
+<p>targetcli</p>
+</blockquote>
+<h3 id="创建共享设备"><a href="#创建共享设备" class="headerlink" title="创建共享设备"></a>创建共享设备</h3><p>/&gt; cd backstores/block<br>/backstores/block&gt; create name=block1 dev=/dev/sdb</p>
+<h3 id="创建共享名"><a href="#创建共享名" class="headerlink" title="创建共享名"></a>创建共享名</h3><p>/backstores/block&gt; cd /iscsi<br>/iscsi&gt; create wwn=iqn.2019-06.com.example:server</p>
+<h3 id="创建需要共享的设备"><a href="#创建需要共享的设备" class="headerlink" title="创建需要共享的设备"></a>创建需要共享的设备</h3><p>/iscsi&gt; cd iqn.2019-06.com.example:server/tpg1/luns<br>/iscsi/iqn.20…ver/tpg1/luns&gt; create /backstores/block/block1 </p>
+<h3 id="设置访问控制列表"><a href="#设置访问控制列表" class="headerlink" title="设置访问控制列表"></a>设置访问控制列表</h3><p>/iscsi/iqn.20…ver/tpg1/luns&gt; cd ..<br>/iscsi/iqn.20…e:server/tpg1&gt; cd acls<br>/iscsi/iqn.20…ver/tpg1/acls&gt; create iqn.2019-06.com.example:client</p>
+<h3 id="设置iscsi服务器地址和端口"><a href="#设置iscsi服务器地址和端口" class="headerlink" title="设置iscsi服务器地址和端口"></a>设置iscsi服务器地址和端口</h3><p>/iscsi/iqn.20…ver/tpg1/acls&gt; cd ..<br>/iscsi/iqn.20…e:server/tpg1&gt; cd portals/<br>/iscsi/iqn.20…/tpg1/portals&gt; delete 0.0.0.0 3260<br>/iscsi/iqn.20…/tpg1/portals&gt; create 192.168.17.130 3260</p>
+<h3 id="保存退出"><a href="#保存退出" class="headerlink" title="保存退出"></a>保存退出</h3><p>/iscsi/iqn.20…/tpg1/portals&gt; cd /<br>/&gt;saveconfig<br>/&gt;exit</p>
+<h2 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h2><p>firewall-cmd - -add-port=3260/tcp - -permanent<br>firewall-cmd - -reload</p>
+<h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><p>systemctl restart target<br>systemctl enable target</p>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote>
+<p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.17.131</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>systemctl restart network</p>
+</blockquote>
+<h2 id="配置网络yum源-1"><a href="#配置网络yum源-1" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote>
+<p>cd /etc/yum.repos.d/ </p>
+</blockquote>
+<blockquote>
+<p>touch qzy.repo</p>
+</blockquote>
+<blockquote>
+<p>vim qzy.repo</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>yum repolist</p>
+</blockquote>
+<h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote>
+<p>yum install -y iscsi*</p>
+</blockquote>
+<h2 id="修改iscsi客户端名称"><a href="#修改iscsi客户端名称" class="headerlink" title="修改iscsi客户端名称"></a>修改iscsi客户端名称</h2><p>vim /etc/iscsi/initiatorname.iscsi<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InitiatorName=iqn.2019-06.com.example:client</span><br></pre></td></tr></table></figure></p>
+<h2 id="重启服务-1"><a href="#重启服务-1" class="headerlink" title="重启服务"></a>重启服务</h2><p>systemctl restart iscsid<br>systemctl enable iscsid</p>
+<h2 id="查看需要用到的命令"><a href="#查看需要用到的命令" class="headerlink" title="查看需要用到的命令"></a>查看需要用到的命令</h2><p>man iscsiadm | grep \- -mode </p>
+<h2 id="扫描iscsi服务端"><a href="#扫描iscsi服务端" class="headerlink" title="扫描iscsi服务端"></a>扫描iscsi服务端</h2><p>iscsiadm - -mode discoverydb - -type sendtargets - -portal 192.168.17.130 –discover</p>
+<h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p>iscsiadm - -mode node  - -targetname iqn.2019-06.com.example:server - -portal 192.168.17.130:3260  - -login</p>
+<h2 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h2><p>iscsiadm - -mode node - -targetname iqn.2019-06.com.example:server - -portal 192.168.17.130:3260 -u</p>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>lsblk</p>
+
       
     </div>
 
@@ -542,393 +586,70 @@
        
     
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/assets/weixin.png" alt="Zunney 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/assets/zhifubao.jpg" alt="Zunney 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/nextcloud搭建/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zunney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zunney的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/15/nextcloud搭建/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">Redhat系安装NextCloud私有云</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-15 18:27:13" itemprop="dateCreated datePublished" datetime="2019-05-15T18:27:13+08:00">2019-05-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-16 17:54:32" itemprop="dateModified" datetime="2019-05-16T17:54:32+08:00">2019-05-16</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <blockquote>
-<p>Redhat系安装NextCloud私有云完整流程</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/15/nextcloud搭建/#more" rel="contents">
-                阅读全文 &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/10/逻辑卷的拉伸与压缩/" rel="next" title="逻辑卷的拉伸压缩与快照">
+                <i class="fa fa-chevron-left"></i> 逻辑卷的拉伸压缩与快照
               </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/数据库的安装/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zunney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zunney的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/15/数据库的安装/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">Redhat系安装数据库</a>
-              
             
-          </h1>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-15 18:27:13" itemprop="dateCreated datePublished" datetime="2019-05-15T18:27:13+08:00">2019-05-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-16 17:54:58" itemprop="dateModified" datetime="2019-05-16T17:54:58+08:00">2019-05-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <blockquote>
-<p>Redhat安装数据库完整流程</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/15/数据库的安装/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -938,740 +659,20 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/15/网卡链路聚合/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zunney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zunney的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/15/网卡链路聚合/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">Redhat系网卡链路聚合</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-15 18:27:13" itemprop="dateCreated datePublished" datetime="2019-05-15T18:27:13+08:00">2019-05-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-22 15:05:59" itemprop="dateModified" datetime="2019-05-22T15:05:59+08:00">2019-05-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>Redhat系网卡的链路聚合完整流程</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/15/网卡链路聚合/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/01/19/在Ubuntu上搭建个人博客系统Hexo/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zunney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zunney的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/19/在Ubuntu上搭建个人博客系统Hexo/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">在Ubuntu上搭建个人博客系统Hexo</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-19 04:14:13" itemprop="dateCreated datePublished" datetime="2019-01-19T04:14:13+08:00">2019-01-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-01-20 15:19:32" itemprop="dateModified" datetime="2019-01-20T15:19:32+08:00">2019-01-20</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>ubuntu成为我的日常使用的系统后，特在网上摘取了一篇ubuntu搭建hexo的文章</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/19/在Ubuntu上搭建个人博客系统Hexo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/05/22/hexo备份恢复命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zunney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zunney的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/22/hexo备份恢复命令/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">hexo备份恢复命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-22 14:37:13" itemprop="dateCreated datePublished" datetime="2019-05-22T14:37:13+08:00">2019-05-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-24 14:58:34" itemprop="dateModified" datetime="2019-05-24T14:58:34+08:00">2019-05-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>用于hexo备份恢复命令</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/22/hexo备份恢复命令/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="//zunney.cn/2019/01/20/gnome常用插件/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zunney">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zunney的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/20/gnome常用插件/" class="post-title-link" itemprop="//zunney.cn/page/2/index.html">gnome常用插件</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-20 14:57:06 / 修改时间：15:20:54" itemprop="dateCreated datePublished" datetime="2019-01-20T14:57:06+08:00">2019-01-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>打造一款属于自己的gonme桌面需要用到的插件</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/20/gnome常用插件/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTA1My8xNzU3OA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -1692,8 +693,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1867,6 +877,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端"><span class="nav-number">1.</span> <span class="nav-text">服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络"><span class="nav-number">1.1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网络yum源"><span class="nav-number">1.2.</span> <span class="nav-text">配置网络yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件"><span class="nav-number">1.3.</span> <span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入配置targetcli"><span class="nav-number">1.4.</span> <span class="nav-text">进入配置targetcli</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建共享设备"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建共享设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建共享名"><span class="nav-number">1.4.2.</span> <span class="nav-text">创建共享名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建需要共享的设备"><span class="nav-number">1.4.3.</span> <span class="nav-text">创建需要共享的设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置访问控制列表"><span class="nav-number">1.4.4.</span> <span class="nav-text">设置访问控制列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置iscsi服务器地址和端口"><span class="nav-number">1.4.5.</span> <span class="nav-text">设置iscsi服务器地址和端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存退出"><span class="nav-number">1.4.6.</span> <span class="nav-text">保存退出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙配置"><span class="nav-number">1.5.</span> <span class="nav-text">防火墙配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务"><span class="nav-number">1.6.</span> <span class="nav-text">重启服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端"><span class="nav-number">2.</span> <span class="nav-text">客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置网络-1"><span class="nav-number">2.1.</span> <span class="nav-text">设置网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网络yum源-1"><span class="nav-number">2.2.</span> <span class="nav-text">配置网络yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件-1"><span class="nav-number">2.3.</span> <span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改iscsi客户端名称"><span class="nav-number">2.4.</span> <span class="nav-text">修改iscsi客户端名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务-1"><span class="nav-number">2.5.</span> <span class="nav-text">重启服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看需要用到的命令"><span class="nav-number">2.6.</span> <span class="nav-text">查看需要用到的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫描iscsi服务端"><span class="nav-number">2.7.</span> <span class="nav-text">扫描iscsi服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆"><span class="nav-number">2.8.</span> <span class="nav-text">登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出"><span class="nav-number">2.9.</span> <span class="nav-text">退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看"><span class="nav-number">2.10.</span> <span class="nav-text">查看</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -2014,6 +1040,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -2026,6 +1056,20 @@
 
 
 
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2019/06/20/iscsi搭建/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

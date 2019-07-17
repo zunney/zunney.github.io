@@ -108,9 +108,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Redhat系安装ntp服务器]]></title>
-    <url>%2F2019%2F05%2F15%2Fntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[Redhat系安装ntp时间同步完整流程 服务端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntp ntpdate 修改配置 vim /etc/ntp.conf 1234添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10 重启服务 systemctl restart ntpd 修改防火墙 firewall-cmd - -add-service=ntp - -permanent firewall-cmd - -reload firewall-cmd - -list-all 重启服务 systemctl restart ntpd 修改时间 date -s 10:00:00 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntpdate 同步时间 ntpdate -u 192.168.242.131 查看时间 date]]></content>
+    <title><![CDATA[Redhat系安装KVM虚拟机]]></title>
+    <url>%2F2019%2F05%2F15%2Fkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Redhat系安装KVM虚拟机完整流程 设置网络、网桥 cd /etc/sysconfig/network-scripts/ vim ifcfg-eno16777736 123456TYPE=EthernetBOOTPROTO=staticNAME=eno16777736DEVICE=eno16777736ONBOOT=yesBRIDGE=br0 cp ifcfg-eno16777736 ifcfg-br0 1234567TYPE=BridgeBOOTPROTO=staticDEVICE=br0NAME=br0ONBOOT=yesIPADDR=192.168.10.1NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 mkdir /mnt/hgfs cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[base]name=localenabled=1gpgcheck=0baseurl=file:///mnt/hgfs yum repolist 安装组件 yum install -y qemu-kvm libvirt* virt-manager 启动服务 systemctl restart libvirtd virt-manager]]></content>
       <categories>
         <category>学习</category>
         <category>Linux</category>
@@ -144,6 +144,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Redhat系安装ntp服务器]]></title>
+    <url>%2F2019%2F05%2F15%2Fntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Redhat系安装ntp时间同步完整流程 服务端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.131NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntp ntpdate 修改配置 vim /etc/ntp.conf 1234添加如下配置：restrict 192.168.242.0 mask 255.255.255.0 nomodify notrapserver 127.127.1.0fudge 127.127.1.0 stratum 10 重启服务 systemctl restart ntpd 修改防火墙 firewall-cmd - -add-service=ntp - -permanent firewall-cmd - -reload firewall-cmd - -list-all 重启服务 systemctl restart ntpd 修改时间 date -s 10:00:00 客户端设置网络 vim /etc/sysconfig/network-scripts/ifcfg-ens33 1234567TYPE=EthernetBOOTPROTO=staticNAME=ens33DEVICE=ens33ONBOOT=yesIPADDR=192.168.242.132NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y ntpdate 同步时间 ntpdate -u 192.168.242.131 查看时间 date]]></content>
+      <categories>
+        <category>学习</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Redhat系安装数据库]]></title>
     <url>%2F2019%2F05%2F15%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85%2F</url>
     <content type="text"><![CDATA[Redhat安装数据库完整流程 检查 MariaDB 是否安装 yum list installed | grep mariadb 卸载全部 MariaDB 相关 yum -y remove mariadb* 下载 MySQL 的 YUM 源 wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm 安装 MySQL 的 YUM 源 rpm -ivh mysql57-community-release-el7-11.noarch.rpm 检查 MySQL 的 YUM 源是否安装成功 yum repolist enabled | grep “mysql.-community.“ 查看 MySQL 版本 yum repolist all | grep mysql 安装 MySQL yum install mysql-community-server 启动 MySQL 服务 systemctl start mysqld 查看 MySQL 初始密码 cat /var/log/mysqld.log 测试连接 MySQL 服务 mysql -u root -p 修改密码强调要求 set global validate_password_policy=0; #允许设置弱密码set global validate_password_length=4; #最小长度 修改密码 set password for ‘root‘@’localhost’=password(‘123456’); 刷新权限 flush privileges; 防火墙设置 开放 3306 端口： firewall-cmd –permanent –zone=public –add-port=3306/tcp firewall-cmd –permanent –zone=public –add-port=3306/udp firewall-cmd –reload 如果是 CentOS 7，需要将 MySQL 服务加入防火墙，然后重启防火墙： firewall-cmd –zone=public –permanent –add-service=mysql systemctl restart firewalld 设置允许远程访问 grant all privileges on . to root@”%” identified by ‘0’; flush privileges; 相关命令 systemctl start mysqld #启动mysql systemctl stop mysqld #停止mysqld&gt; systemctl restart mysqld #重启mysqld systemctl enable mysqld #设置开机启动 systemctl status mysqld #查看 MySQL Server 状态 防火墙相关： systemctl status firewalld #查看防火墙状态 systemctl start firewalld #打开防火墙 systemctl stop firewalld #关闭防火墙 systemctl restart firewalld #重启防火墙]]></content>
@@ -159,18 +171,6 @@
     <title><![CDATA[Redhat系网卡链路聚合]]></title>
     <url>%2F2019%2F05%2F15%2F%E7%BD%91%E5%8D%A1%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88%2F</url>
     <content type="text"><![CDATA[Redhat系网卡的链路聚合完整流程 配置网络yum源 cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[163]name=163enabled=1gpgcheck=0baseurl=http://mirrors.163.com/centos/7/os/x86_64 yum repolist 安装组件 yum install -y gcc git vim net-tools 拷贝配置模板 cd /usr/share/doc/teamd-1.25/example_ifcfgs/3 cp * /etc/sysconfig/network-scripts/ -v 查看记住网卡名称 ifconfig 更改网卡配置文件名与查看到的相对应 mv ifcfg-eth1 ifcfg-ens37mv ifcfg-eth2 ifcfg-ens38 更改网卡配置文件 vim ifcfg-ens37 12345DEVICE=&quot;ens37&quot;DEVICETYPE=&quot;TeamPort&quot;ONBOOT=&quot;yes&quot;TEAM_MASTER=&quot;team_test0&quot;TEAM_PORT_CONFIG=&apos;&#123;&quot;prio&quot;: -10, &quot;sticky&quot;: true&#125;&apos; vim ifcfg-ens38 12345DEVICE=&quot;ens38&quot;DEVICETYPE=&quot;TeamPort&quot;ONBOOT=&quot;yes&quot;TEAM_MASTER=&quot;team_test0&quot;TEAM_PORT_CONFIG=&apos;&#123;&quot;prio&quot;: -10, &quot;sticky&quot;: true&#125;&apos; cat ifcfg-team_test0 1234567DEVICE=&quot;team_test0&quot;DEVICETYPE=&quot;Team&quot;ONBOOT=&quot;yes&quot;BOOTPROTO=noneNETMASK=255.255.255.0IPADDR=192.168.9.66TEAM_CONFIG=&apos;&#123;&quot;runner&quot;: &#123;&quot;name&quot;: &quot;activebackup&quot;&#125;&#125;&apos; 重启网络 systemctl restart network 查看聚合链路 teamdctl team_test0 state 查看网卡 nmcli connection show]]></content>
-      <categories>
-        <category>学习</category>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Redhat系安装KVM虚拟机]]></title>
-    <url>%2F2019%2F05%2F15%2Fkvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA%2F</url>
-    <content type="text"><![CDATA[Redhat系安装KVM虚拟机完整流程 设置网络、网桥 cd /etc/sysconfig/network-scripts/ vim ifcfg-eno16777736 123456TYPE=EthernetBOOTPROTO=staticNAME=eno16777736DEVICE=eno16777736ONBOOT=yesBRIDGE=br0 cp ifcfg-eno16777736 ifcfg-br0 1234567TYPE=BridgeBOOTPROTO=staticDEVICE=br0NAME=br0ONBOOT=yesIPADDR=192.168.10.1NETMASK=255.255.255.0 systemctl restart network 配置网络yum源 mkdir /mnt/hgfs cd /etc/yum.repos.d/ touch qzy.repo vim qzy.repo 12345[base]name=localenabled=1gpgcheck=0baseurl=file:///mnt/hgfs yum repolist 安装组件 yum install -y qemu-kvm libvirt* virt-manager 启动服务 systemctl restart libvirtd virt-manager]]></content>
       <categories>
         <category>学习</category>
         <category>Linux</category>

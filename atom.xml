@@ -249,6 +249,32 @@
   </entry>
   
   <entry>
+    <title>Redhat系安装KVM虚拟机</title>
+    <link href="//zunney.cn/2019/05/15/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/kvm虚拟机搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-22T07:00:11.203Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装KVM虚拟机完整流程</p></blockquote><a id="more"></a><h2 id="设置网络、网桥"><a href="#设置网络、网桥" class="headerlink" title="设置网络、网桥"></a>设置网络、网桥</h2><blockquote><p>cd /etc/sysconfig/network-scripts/</p></blockquote><blockquote><p>vim ifcfg-eno16777736</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=eno16777736</span><br><span class="line">DEVICE=eno16777736</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BRIDGE=br0</span><br></pre></td></tr></table></figure><blockquote><p>cp ifcfg-eno16777736 ifcfg-br0</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Bridge</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">DEVICE=br0</span><br><span class="line">NAME=br0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.10.1</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>mkdir /mnt/hgfs</p></blockquote><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name=local</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=file:///mnt/hgfs</span><br></pre></td></tr></table></figure><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y qemu-kvm libvirt* virt-manager </p></blockquote><h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><blockquote><p>systemctl restart libvirtd</p></blockquote><blockquote><p>virt-manager</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装KVM虚拟机完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Redhat系安装NextCloud私有云</title>
     <link href="//zunney.cn/2019/05/15/nextcloud%E6%90%AD%E5%BB%BA/"/>
     <id>//zunney.cn/2019/05/15/nextcloud搭建/</id>
@@ -275,18 +301,18 @@
   </entry>
   
   <entry>
-    <title>Redhat系安装KVM虚拟机</title>
-    <link href="//zunney.cn/2019/05/15/kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/kvm虚拟机搭建/</id>
+    <title>Redhat系安装nfs服务器</title>
+    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
     <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-22T07:00:11.203Z</updated>
+    <updated>2019-06-20T09:38:39.377Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装KVM虚拟机完整流程</p></blockquote><a id="more"></a><h2 id="设置网络、网桥"><a href="#设置网络、网桥" class="headerlink" title="设置网络、网桥"></a>设置网络、网桥</h2><blockquote><p>cd /etc/sysconfig/network-scripts/</p></blockquote><blockquote><p>vim ifcfg-eno16777736</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=eno16777736</span><br><span class="line">DEVICE=eno16777736</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BRIDGE=br0</span><br></pre></td></tr></table></figure><blockquote><p>cp ifcfg-eno16777736 ifcfg-br0</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Bridge</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">DEVICE=br0</span><br><span class="line">NAME=br0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.10.1</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>mkdir /mnt/hgfs</p></blockquote><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name=local</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=file:///mnt/hgfs</span><br></pre></td></tr></table></figure><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y qemu-kvm libvirt* virt-manager </p></blockquote><h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><blockquote><p>systemctl restart libvirtd</p></blockquote><blockquote><p>virt-manager</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.131</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd - -add-service=nfs - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=mountd - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=rpc-bind - -permanent</p></blockquote><blockquote><p>firewall-cmd - -reload</p></blockquote><h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.132</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="开启服务-1"><a href="#开启服务-1" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装KVM虚拟机完整流程&lt;/p&gt;
+&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -365,32 +391,6 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;Redhat系网卡的链路聚合完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redhat系安装nfs服务器</title>
-    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-06-20T09:38:39.377Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.131</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd - -add-service=nfs - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=mountd - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=rpc-bind - -permanent</p></blockquote><blockquote><p>firewall-cmd - -reload</p></blockquote><h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.132</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="开启服务-1"><a href="#开启服务-1" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>

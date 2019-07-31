@@ -275,32 +275,6 @@
   </entry>
   
   <entry>
-    <title>Redhat系安装nfs服务器</title>
-    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
-    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-06-20T09:38:39.377Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.131</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd - -add-service=nfs - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=mountd - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=rpc-bind - -permanent</p></blockquote><blockquote><p>firewall-cmd - -reload</p></blockquote><h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.132</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="开启服务-1"><a href="#开启服务-1" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Redhat系安装NextCloud私有云</title>
     <link href="//zunney.cn/2019/05/15/nextcloud%E6%90%AD%E5%BB%BA/"/>
     <id>//zunney.cn/2019/05/15/nextcloud搭建/</id>
@@ -327,6 +301,32 @@
   </entry>
   
   <entry>
+    <title>Redhat系安装nfs服务器</title>
+    <link href="//zunney.cn/2019/05/15/nfs%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
+    <id>//zunney.cn/2019/05/15/nfs服务搭建/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-06-20T09:38:39.377Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat系安装nfs时间同步完整流程</p></blockquote><a id="more"></a><p>#服务端#</p><h2 id="设置网络"><a href="#设置网络" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.131</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="配置网络yum源"><a href="#配置网络yum源" class="headerlink" title="配置网络yum源"></a>配置网络yum源</h2><blockquote><p>cd /etc/yum.repos.d/ </p></blockquote><blockquote><p>touch qzy.repo</p></blockquote><blockquote><p>vim qzy.repo</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[163]</span><br><span class="line">name=163</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">baseurl=http://mirrors.163.com/centos/7/os/x86_64</span><br></pre></td></tr></table></figure><blockquote><p>yum repolist</p></blockquote><h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="修改nfs配置文件"><a href="#修改nfs配置文件" class="headerlink" title="修改nfs配置文件"></a>修改nfs配置文件</h2><blockquote><p>mkdir /redhat</p></blockquote><blockquote><p>echo “/redhat    192.168.242.0/255.255.255.0(rw,no_root_squash,no_all_squash)” /etc/exports</p></blockquote><blockquote><p>exportfs -v</p></blockquote><h2 id="防火墙开端口"><a href="#防火墙开端口" class="headerlink" title="防火墙开端口"></a>防火墙开端口</h2><blockquote><p>firewall-cmd - -add-service=nfs - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=mountd - -permanent</p></blockquote><blockquote><p>firewall-cmd - -add-service=rpc-bind - -permanent</p></blockquote><blockquote><p>firewall-cmd - -reload</p></blockquote><h2 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="设置网络-1"><a href="#设置网络-1" class="headerlink" title="设置网络"></a>设置网络</h2><blockquote><p>vim /etc/sysconfig/network-scripts/ifcfg-ens33</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=ens33</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=192.168.242.132</span><br><span class="line">NETMASK=255.255.255.0</span><br></pre></td></tr></table></figure><blockquote><p>systemctl restart network</p></blockquote><h2 id="安装组件-1"><a href="#安装组件-1" class="headerlink" title="安装组件"></a>安装组件</h2><blockquote><p>yum install -y rpcbind nfs-utils nfs4-acl-tools</p></blockquote><h2 id="开启服务-1"><a href="#开启服务-1" class="headerlink" title="开启服务"></a>开启服务</h2><blockquote><p>systemctl restart nfs</p></blockquote><blockquote><p>systemctl restart rpcbind</p></blockquote><blockquote><p>systemctl enable nfs</p></blockquote><blockquote><p>systemctl enable rpcbind</p></blockquote><h2 id="挂载nfs网络存储"><a href="#挂载nfs网络存储" class="headerlink" title="挂载nfs网络存储"></a>挂载nfs网络存储</h2><blockquote><p>mount -t nfs 192.168.242.131:/redhat /mnt/redhat/</p></blockquote><blockquote><p>df -h</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat系安装nfs时间同步完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Redhat系安装ntp服务器</title>
     <link href="//zunney.cn/2019/05/15/ntp%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
     <id>//zunney.cn/2019/05/15/ntp服务搭建/</id>
@@ -339,6 +339,32 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;Redhat系安装ntp时间同步完整流程&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
+    
+    
+      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redhat系安装数据库</title>
+    <link href="//zunney.cn/2019/05/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85/"/>
+    <id>//zunney.cn/2019/05/15/数据库的安装/</id>
+    <published>2019-05-15T10:27:13.000Z</published>
+    <updated>2019-05-16T09:54:58.831Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Redhat安装数据库完整流程</p></blockquote><a id="more"></a><h2 id="检查-MariaDB-是否安装"><a href="#检查-MariaDB-是否安装" class="headerlink" title="检查 MariaDB 是否安装"></a>检查 MariaDB 是否安装</h2><blockquote><p>yum list installed | grep mariadb</p></blockquote><h2 id="卸载全部-MariaDB-相关"><a href="#卸载全部-MariaDB-相关" class="headerlink" title="卸载全部 MariaDB 相关"></a>卸载全部 MariaDB 相关</h2><blockquote><p>yum -y remove mariadb*</p></blockquote><h2 id="下载-MySQL-的-YUM-源"><a href="#下载-MySQL-的-YUM-源" class="headerlink" title="下载 MySQL 的 YUM 源"></a>下载 MySQL 的 YUM 源</h2><blockquote><p>wget <a href="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</a></p></blockquote><h2 id="安装-MySQL-的-YUM-源"><a href="#安装-MySQL-的-YUM-源" class="headerlink" title="安装 MySQL 的 YUM 源"></a>安装 MySQL 的 YUM 源</h2><blockquote><p>rpm -ivh mysql57-community-release-el7-11.noarch.rpm</p></blockquote><h2 id="检查-MySQL-的-YUM-源是否安装成功"><a href="#检查-MySQL-的-YUM-源是否安装成功" class="headerlink" title="检查 MySQL 的 YUM 源是否安装成功"></a>检查 MySQL 的 YUM 源是否安装成功</h2><blockquote><p>yum repolist enabled | grep “mysql.<em>-community.</em>“</p></blockquote><h2 id="查看-MySQL-版本"><a href="#查看-MySQL-版本" class="headerlink" title="查看 MySQL 版本"></a>查看 MySQL 版本</h2><blockquote><p>yum repolist all | grep mysql</p></blockquote><h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><blockquote><p>yum install mysql-community-server</p></blockquote><h2 id="启动-MySQL-服务"><a href="#启动-MySQL-服务" class="headerlink" title="启动 MySQL 服务"></a>启动 MySQL 服务</h2><blockquote><p>systemctl start mysqld</p></blockquote><h2 id="查看-MySQL-初始密码"><a href="#查看-MySQL-初始密码" class="headerlink" title="查看 MySQL 初始密码"></a>查看 MySQL 初始密码</h2><blockquote><p>cat /var/log/mysqld.log</p></blockquote><h2 id="测试连接-MySQL-服务"><a href="#测试连接-MySQL-服务" class="headerlink" title="测试连接 MySQL 服务"></a>测试连接 MySQL 服务</h2><blockquote><p>mysql -u root -p</p></blockquote><h2 id="修改密码强调要求"><a href="#修改密码强调要求" class="headerlink" title="修改密码强调要求"></a>修改密码强调要求</h2><blockquote><p>set global validate_password_policy=0;    #允许设置弱密码<br>set global validate_password_length=4;    #最小长度</p></blockquote><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><blockquote><p>set password for ‘root‘@’localhost’=password(‘123456’);</p></blockquote><h2 id="刷新权限"><a href="#刷新权限" class="headerlink" title="刷新权限"></a>刷新权限</h2><blockquote><p>flush privileges;</p></blockquote><h2 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h2><blockquote><p>开放 3306 端口：</p></blockquote><blockquote><p>firewall-cmd –permanent –zone=public –add-port=3306/tcp</p></blockquote><blockquote><p>firewall-cmd –permanent –zone=public –add-port=3306/udp</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>如果是 CentOS 7，需要将 MySQL 服务加入防火墙，然后重启防火墙：</p></blockquote><blockquote><p>firewall-cmd –zone=public –permanent –add-service=mysql</p></blockquote><blockquote><p>systemctl restart firewalld</p></blockquote><h2 id="设置允许远程访问"><a href="#设置允许远程访问" class="headerlink" title="设置允许远程访问"></a>设置允许远程访问</h2><blockquote><p>grant all privileges on <em>.</em> to root@”%” identified by ‘0’;</p></blockquote><blockquote><p>flush privileges;</p></blockquote><h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><blockquote><p>systemctl start mysqld    #启动mysql</p></blockquote><blockquote><p>systemctl stop mysqld    #停止mysqld&gt;</p></blockquote><blockquote><p>systemctl restart mysqld    #重启mysqld</p></blockquote><blockquote><p>systemctl enable mysqld    #设置开机启动</p></blockquote><blockquote><p>systemctl status mysqld    #查看 MySQL Server 状态</p></blockquote><h2 id="防火墙相关："><a href="#防火墙相关：" class="headerlink" title="防火墙相关："></a>防火墙相关：</h2><blockquote><p>systemctl status firewalld    #查看防火墙状态</p></blockquote><blockquote><p>systemctl start firewalld    #打开防火墙</p></blockquote><blockquote><p>systemctl stop firewalld    #关闭防火墙</p></blockquote><blockquote><p>systemctl restart firewalld    #重启防火墙</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Redhat安装数据库完整流程&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -391,32 +417,6 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;Redhat系网卡邮件传输协议&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="学习" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Linux" scheme="//zunney.cn/categories/%E5%AD%A6%E4%B9%A0/Linux/"/>
-    
-    
-      <category term="Linux" scheme="//zunney.cn/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redhat系安装数据库</title>
-    <link href="//zunney.cn/2019/05/15/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85/"/>
-    <id>//zunney.cn/2019/05/15/数据库的安装/</id>
-    <published>2019-05-15T10:27:13.000Z</published>
-    <updated>2019-05-16T09:54:58.831Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Redhat安装数据库完整流程</p></blockquote><a id="more"></a><h2 id="检查-MariaDB-是否安装"><a href="#检查-MariaDB-是否安装" class="headerlink" title="检查 MariaDB 是否安装"></a>检查 MariaDB 是否安装</h2><blockquote><p>yum list installed | grep mariadb</p></blockquote><h2 id="卸载全部-MariaDB-相关"><a href="#卸载全部-MariaDB-相关" class="headerlink" title="卸载全部 MariaDB 相关"></a>卸载全部 MariaDB 相关</h2><blockquote><p>yum -y remove mariadb*</p></blockquote><h2 id="下载-MySQL-的-YUM-源"><a href="#下载-MySQL-的-YUM-源" class="headerlink" title="下载 MySQL 的 YUM 源"></a>下载 MySQL 的 YUM 源</h2><blockquote><p>wget <a href="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</a></p></blockquote><h2 id="安装-MySQL-的-YUM-源"><a href="#安装-MySQL-的-YUM-源" class="headerlink" title="安装 MySQL 的 YUM 源"></a>安装 MySQL 的 YUM 源</h2><blockquote><p>rpm -ivh mysql57-community-release-el7-11.noarch.rpm</p></blockquote><h2 id="检查-MySQL-的-YUM-源是否安装成功"><a href="#检查-MySQL-的-YUM-源是否安装成功" class="headerlink" title="检查 MySQL 的 YUM 源是否安装成功"></a>检查 MySQL 的 YUM 源是否安装成功</h2><blockquote><p>yum repolist enabled | grep “mysql.<em>-community.</em>“</p></blockquote><h2 id="查看-MySQL-版本"><a href="#查看-MySQL-版本" class="headerlink" title="查看 MySQL 版本"></a>查看 MySQL 版本</h2><blockquote><p>yum repolist all | grep mysql</p></blockquote><h2 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h2><blockquote><p>yum install mysql-community-server</p></blockquote><h2 id="启动-MySQL-服务"><a href="#启动-MySQL-服务" class="headerlink" title="启动 MySQL 服务"></a>启动 MySQL 服务</h2><blockquote><p>systemctl start mysqld</p></blockquote><h2 id="查看-MySQL-初始密码"><a href="#查看-MySQL-初始密码" class="headerlink" title="查看 MySQL 初始密码"></a>查看 MySQL 初始密码</h2><blockquote><p>cat /var/log/mysqld.log</p></blockquote><h2 id="测试连接-MySQL-服务"><a href="#测试连接-MySQL-服务" class="headerlink" title="测试连接 MySQL 服务"></a>测试连接 MySQL 服务</h2><blockquote><p>mysql -u root -p</p></blockquote><h2 id="修改密码强调要求"><a href="#修改密码强调要求" class="headerlink" title="修改密码强调要求"></a>修改密码强调要求</h2><blockquote><p>set global validate_password_policy=0;    #允许设置弱密码<br>set global validate_password_length=4;    #最小长度</p></blockquote><h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><blockquote><p>set password for ‘root‘@’localhost’=password(‘123456’);</p></blockquote><h2 id="刷新权限"><a href="#刷新权限" class="headerlink" title="刷新权限"></a>刷新权限</h2><blockquote><p>flush privileges;</p></blockquote><h2 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h2><blockquote><p>开放 3306 端口：</p></blockquote><blockquote><p>firewall-cmd –permanent –zone=public –add-port=3306/tcp</p></blockquote><blockquote><p>firewall-cmd –permanent –zone=public –add-port=3306/udp</p></blockquote><blockquote><p>firewall-cmd –reload</p></blockquote><blockquote><p>如果是 CentOS 7，需要将 MySQL 服务加入防火墙，然后重启防火墙：</p></blockquote><blockquote><p>firewall-cmd –zone=public –permanent –add-service=mysql</p></blockquote><blockquote><p>systemctl restart firewalld</p></blockquote><h2 id="设置允许远程访问"><a href="#设置允许远程访问" class="headerlink" title="设置允许远程访问"></a>设置允许远程访问</h2><blockquote><p>grant all privileges on <em>.</em> to root@”%” identified by ‘0’;</p></blockquote><blockquote><p>flush privileges;</p></blockquote><h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><blockquote><p>systemctl start mysqld    #启动mysql</p></blockquote><blockquote><p>systemctl stop mysqld    #停止mysqld&gt;</p></blockquote><blockquote><p>systemctl restart mysqld    #重启mysqld</p></blockquote><blockquote><p>systemctl enable mysqld    #设置开机启动</p></blockquote><blockquote><p>systemctl status mysqld    #查看 MySQL Server 状态</p></blockquote><h2 id="防火墙相关："><a href="#防火墙相关：" class="headerlink" title="防火墙相关："></a>防火墙相关：</h2><blockquote><p>systemctl status firewalld    #查看防火墙状态</p></blockquote><blockquote><p>systemctl start firewalld    #打开防火墙</p></blockquote><blockquote><p>systemctl stop firewalld    #关闭防火墙</p></blockquote><blockquote><p>systemctl restart firewalld    #重启防火墙</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Redhat安装数据库完整流程&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
